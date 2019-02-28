@@ -14,7 +14,7 @@ public class item {
 		try {
 			
 
-			this.img = ImageIO.read(new File("src/images/stick.png"));
+			this.img = ImageIO.read(new File("src/images/bretagne.jpg"));
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
