@@ -1,38 +1,36 @@
 
 
 import java.awt.BorderLayout;
+import java.awt.Button;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Frame;
 import java.awt.GridLayout;
+import java.awt.Label;
 import java.awt.Panel;
+import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
 
 public class Application extends Frame implements WindowListener{
 	
-	int WIDTH = 1200;
-	int HEIGHT = 800;
+	int WIDTH = 1000;
+	int HEIGHT = 500;
+	int tailleCase = 48;
+	int border = 2;
+
 	
 	public Application() {
 
 		Modele m = new Modele();
 		Controleur c = new Controleur(m);
+		View_Craft craft = new View_Craft(WIDTH,HEIGHT);
 		
-		AffichageCraft AffCraft= new AffichageCraft(c,m);
 		
-		Panel inv = new Panel();
-		Panel panCraft = new Panel();
-		
-		inv.setBounds(40, 50, 500, 200);;
-		inv.setBackground(Color.pink);
-		inv.add(AffCraft);
-		
-		panCraft.setBounds(40, 50, 500, 200);;
-		panCraft.setBackground(Color.red);
-		panCraft.add(inv);
-		this.add(panCraft);
-		
+		this.add(craft);
+		//this.AffichageCraft(c,m);
 		this.addWindowListener(this);
 		this.setTitle("MinecraftProject");
 		this.setSize(WIDTH,HEIGHT);
@@ -42,6 +40,13 @@ public class Application extends Frame implements WindowListener{
 	
 	public static void main(String[] args) {
 		new Application();
+	}
+	
+	public void AffichageCraft( Controleur c, Modele m) {
+
+		
+		
+		
 	}
 	@Override
 	public void windowActivated(WindowEvent arg0) {

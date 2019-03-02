@@ -10,6 +10,7 @@ import java.util.Observer;
 public class AffichageCraft extends Canvas implements Observer{
 	item test;
 	public AffichageCraft(ItemListener l,Modele m) {
+		
 		this.setBackground(Color.GRAY);
 		this.setSize(50,50);
 
