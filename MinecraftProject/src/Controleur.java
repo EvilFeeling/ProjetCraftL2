@@ -22,8 +22,13 @@ public class Controleur implements ItemListener,ActionListener {
 		// TODO Auto-generated method stub
 		
 		Object source = e.getSource();
+		System.out.println(((Button)source).getLabel());
 		if (e.getSource() instanceof Button) {
-			//System.out.println(((Button)source).getBackground());
+			
+			if (((Button)source).getLabel() == "Arborescence");
+			{
+				System.out.println("coucou");
+			}
 
 		}
 	}

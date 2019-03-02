@@ -17,7 +17,7 @@ import java.awt.event.WindowListener;
 public class Application extends Frame implements WindowListener{
 	
 	int WIDTH = 1000;
-	int HEIGHT = 500;
+	int HEIGHT = 600;
 	int tailleCase = 48;
 	int border = 2;
 
