@@ -1,12 +1,10 @@
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
-public class Arborescence<String,item> extends HashMap{
+public class Arborescence {
+	HashMap<Integer,item> Ascendant= new HashMap();
+	HashMap<item,item> Descendant= new HashMap();
 	
-	public void need() {
-		
-	}
 	
-	public void craft() {
-		
-	}
 }

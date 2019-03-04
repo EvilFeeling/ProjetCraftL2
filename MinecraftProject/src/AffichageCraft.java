@@ -20,7 +20,7 @@ public class AffichageCraft extends Canvas implements Observer{
 	
 	public void paint(Graphics g) {
 		
-		test = new item();
+		test = new item("stick");
 		g.drawImage(test.img,0,0,48,48,null);
 			
 		

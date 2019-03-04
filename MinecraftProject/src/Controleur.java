@@ -22,15 +22,19 @@ public class Controleur implements ItemListener,ActionListener {
 		// TODO Auto-generated method stub
 		
 		Object source = e.getSource();
-		System.out.println(((Button)source).getLabel());
+		
 		if (e.getSource() instanceof Button) {
-			
-			if (((Button)source).getLabel() == "Arborescence");
+			Button evt = (Button)source;
+			if (evt.getLabel() == "Arborescence");
 			{
-				System.out.println("coucou");
+				Arborescence();
 			}
-
 		}
+	}
+	
+	public void Arborescence() {
+		//modl.listeItems.getKey("plop");
+		
 	}
 	
 	
