@@ -1,4 +1,7 @@
+import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Panel;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -6,7 +9,7 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
-public class item {
+public class item extends Panel{
 	
 	public String nom;
 	public int x=0,y=0;
@@ -44,23 +47,7 @@ public class item {
 	
 	public void howToCraft(Object craftList) {
 		this.craftList = new ArrayList<ArrayList<item>>();
-		this.craftCode = -1;
-		if (craftList instanceof ArrayList<?>) {
-			ArrayList<ArrayList<item>> list = (ArrayList<ArrayList<item>>)craftList;
-			for (int i = 0; i < list.size(); i++) {
-				ArrayList<item> ligne = new ArrayList<item>();
-				for (int j = 0; j < list.get(0).size(); j++) {
-					item k = list.get(i).get(j);
-					if (k != null && k.nom != "vide") {
-						System.out.println("i:" + i+k.nom);
-						this.craftCode += (i+k.nom).hashCode();
-						ligne.add(k);
-					}
-					
-				}
-				this.craftList.add(ligne);
-			}
-		}
+		
 		if (craftList instanceof item[][]) {			
 			item[][] list = (item[][])craftList;
 			for (int i = 0; i < list.length; i++) {
@@ -68,8 +55,6 @@ public class item {
 				for (int j = 0; j < list[0].length; j++) {
 					item k = list[i][j];
 					if (k != null) {
-						System.out.println("i:" + i+k.nom);
-						this.craftCode += (i+k.nom).hashCode();
 						ligne.add(k);
 					}
 					
@@ -78,6 +63,8 @@ public class item {
 			}
 			
 		}
+		this.getMinCraft();
+		this.craftCode();
 	}
 	// Méthode s'appliquant à la zone de craft, comparant, l'objet de test et un autre item.
 	public boolean sameCraft(item other) {
@@ -86,10 +73,10 @@ public class item {
 			for (int j = 0; j < this.craftList.get(0).size(); j++) 
 				if (other.craftList.get(i).get(j) != this.craftList.get(i).get(j))
 					return false;
-			
 		return true;
 	}
-	// Renvoie le craft minimum d'un item en retirant toutes les valeurs à null
+	
+	// Renvoie le craft minimum d'un item en retirant toutes les valeurs à null et vide dépassant de la matrice minimum
 	public void getMinCraft() {
 		ArrayList<ArrayList<item>> finalCraft = new ArrayList<ArrayList<item>>();
 		int maxX,maxY,minX,minY;
@@ -118,17 +105,42 @@ public class item {
 				finalCraft.add(ligne);
 			}
 			this.craftList = finalCraft;
-		}
-		//this.howToCraft(finalCraft);
-		
+		}		
 	}
+	
 	@Override
     public int hashCode() {
+		
 		if (this.nom == "vide") {
 			return 0;
 		}
         return this.nom.hashCode();
     }
+	
+	public void craftCode() {
+		this.craftCode = -1;
+		for (int i = 0; i < this.craftList.size(); i++) {
+			for (int j = 0; j < this.craftList.get(0).size(); j++) {
+				item k = this.craftList.get(i).get(j);
+				this.craftCode += (i+k.nom).hashCode();
+			}
+				
+		}
+	}
+	
+	public void paintComponent(Graphics g) {
+          String test = " x vaut " + x ;
+          String test2 = " y vaut " + y ;
+          //g.drawImage(img, x, y, this);
+          g.setColor(Color.red);
+          g.drawRect(0, 0, 100, 100);
+          g.drawString(test,400 , 100);
+          System.out.println(test);
+          System.out.println(test2);
+	   
+	       
+	}
+	
 	
 	
 }

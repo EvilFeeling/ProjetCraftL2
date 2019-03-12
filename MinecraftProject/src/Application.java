@@ -28,6 +28,7 @@ public class Application extends Frame implements WindowListener{
 		this.setVisible(true);
 	}
 	
+	
 	public static void main(String[] args) {
 		new Application();
 	}
