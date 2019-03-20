@@ -12,6 +12,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 public class View_Craft extends Panel implements Observer{
+	int aezaeza;
 	int WIDTH = 1000;
 	int HEIGHT = 600;
 	int tailleCase = 48;
