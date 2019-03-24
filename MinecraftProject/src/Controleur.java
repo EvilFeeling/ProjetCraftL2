@@ -9,12 +9,13 @@ import java.awt.event.ItemListener;
 public class Controleur implements ItemListener,ActionListener {
 
 	Modele modl;
-	public Controleur(Modele m) {
+	Application appli;
+	public Controleur(Modele m, Application ap) {
 		this.modl=m;
+		this.appli=ap;
 	}
 	@Override
 	public void itemStateChanged(ItemEvent e) {
-		// TODO Auto-generated method stub
 	
 	}
 	@Override
@@ -22,19 +23,29 @@ public class Controleur implements ItemListener,ActionListener {
 		// TODO Auto-generated method stub
 		
 		Object source = e.getSource();
-		
 		if (e.getSource() instanceof Button) {
 			Button evt = (Button)source;
-			if (evt.getLabel() == "Arborescence");
-			{
+			if (evt.getLabel() == "Arborescence"){
 				Arborescence();
+			}
+			if (evt.getLabel() == "Craft") {
+				this.appli.AffichageCraft(this,this.modl);
+			}
+			if (evt.getLabel() == "Menu") {
+				this.appli.AffichageMenu(this,this.modl);
+			}
+			if (evt.getLabel() == "Manuel d'utilisation") {
+				this.appli.AffichageManuel(this,this.modl);
+			}
+			if (evt.getLabel() == "Retour") {
+				this.appli.AffichageMenu(this,this.modl);
 			}
 		}
 	}
 	
 	public void Arborescence() {
 		//modl.listeItems.getKey("plop");
-		
+		System.out.println("plop");
 	}
 	
 	

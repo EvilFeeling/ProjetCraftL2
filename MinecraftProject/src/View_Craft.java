@@ -12,7 +12,6 @@ import java.util.Observable;
 import java.util.Observer;
 
 public class View_Craft extends Panel implements Observer{
-	int a;
 	int WIDTH = 1000;
 	int HEIGHT = 600;
 	int tailleCase = 48;
@@ -36,6 +35,7 @@ public class View_Craft extends Panel implements Observer{
 		menu.setBounds(50,50,110,50);
 		menu.setBackground(Color.green);
 		menu.setFont(fontMenu);
+		menu.addActionListener(al);
 		
 		Panel inv = new Panel();
 		tx = (tailleCase * 5) + border * 5;
@@ -43,7 +43,7 @@ public class View_Craft extends Panel implements Observer{
 		inv.setBounds(50, this.HEIGHT/2 - ty/2 - 30, tx, ty);
 		inv.setBackground(Color.blue);
 		
-		Panel right = new P_CraftRight();
+		Panel right = new P_CraftRight(al);
 		
 		right.setBounds(this.WIDTH - tx - 50, this.HEIGHT/2 - ty/2 - 30, tx, ty);
 		
@@ -64,6 +64,10 @@ public class View_Craft extends Panel implements Observer{
 		for (int i = 0; i < m.listeItems.size(); i++) {
 			invCrea.add(new Panel());
 		}*/
+		tx = (tailleCase * 5) + border * 5;
+		ty = (tailleCase * 5) + border * 5;
+		
+
 		
 		this.add(titre);
 		this.add(menu);
