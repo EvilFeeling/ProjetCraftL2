@@ -24,10 +24,11 @@ public class ControllerCraft implements EventHandler {
 	Item vide = new Item("vide");				// Vide
 	Item rock = new Item("rock");				// Pierre
 	Item zoneCraft = new Item("zoneCraft");		// ZoneCraft
-	
+	Item stone_sword = new Item("stone_sword");	// epe en pierre
+
 	Item[][] matCraft = 	{	{rock,vide,vide},	 
 							{vide,vide,vide}, 	
-							{vide,vide,vide}
+							{vide,stone_sword,vide}
 						};
 
 	Pane[][] tabP = 	{	{new PaneItem(0,0),new PaneItem(1,0),new PaneItem(2,0)},
