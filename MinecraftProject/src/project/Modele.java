@@ -18,6 +18,7 @@ public class Modele extends Application {
 	Item pick = new Item("pick");				// Pioche
 	Item axe = new Item("axe");					// Hache
 	Item slabs = new Item("slabs");				// Plancher
+	Item stone_sword = new Item("stone_sword");	// epe en piere
 	codeCraft_HashMap codeCraft = new codeCraft_HashMap ();
 	
     public static void main(final String[] args) {
