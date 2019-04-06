@@ -22,6 +22,8 @@ public class VCIPlayer extends ScrollPane{
 	int ncol = 15;
 	int nlig = 3;
 	Item vide = new Item("vide");
+	//Creating a Grid Pane 
+	GridPane gridPane =new GridPane();	
 	
 	ArrayList<ArrayList<Item>> matrice = new ArrayList< ArrayList<Item> > ();
 
@@ -39,8 +41,7 @@ public class VCIPlayer extends ScrollPane{
 		TextField textField1 = new TextField(); 
 		textField1.setPrefWidth(80);
 
-		//Creating a Grid Pane 
-		GridPane gridPane =new GridPane();	
+		
 
 		//Setting the vertical and horizontal gaps between the columns 
 		gridPane.setVgap(5); 
@@ -55,33 +56,7 @@ public class VCIPlayer extends ScrollPane{
 
 		gridPane.setPadding(new Insets(20, 10, 10, 10));
 		GridPane gridpane = new GridPane();
-		// Set Les cases vides
-		for (int i = 0; i < nlig; i++) {
-			ArrayList<Pane> Ligne = new ArrayList<Pane>();
-			for (int j = 0; j < ncol; j++) {
-				Pane k = new Pane();
-				
-				k.setStyle(chaine);
-				k.setPrefSize(tc,tc);
-				k.setMaxSize(tc, tc);
-				Ligne.add(k);
-				gridPane.add(k, j, i+1, 1, 1);
-				
-			}
-			tabP.add(Ligne);
-		}
 
-		for (int i=0;i<matrice.size();i++) {
-			for (int j = 0; j < matrice.size(); j++) {
-				if (matrice.get(i).get(j) != vide) {
-					Item img = matrice.get(i).get(j);
-					tabP.get(i).get(j).getChildren().removeAll();
-					tabP.get(i).get(j).getChildren().add(img);
-
-				}
-			}
-		}
-		
 		gridPane.add(text1, 0, 0 ); 
 		gridPane.add(textField1, 1, 0);
 		
@@ -96,5 +71,16 @@ public class VCIPlayer extends ScrollPane{
 
 
 	} 
+	
+	public void majInv() {
+		for (int i=0;i<matrice.size();i++) {
+			for (int j = 0; j < matrice.get(i).size(); j++) {
+					Item img = matrice.get(i).get(j);
+					System.out.println(tabP.get(i).get(j) + " " +img);
+					tabP.get(i).get(j).getChildren().clear();
+					tabP.get(i).get(j).getChildren().add(img);
+			}
+		}
+	}
 	
 }

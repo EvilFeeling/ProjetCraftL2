@@ -19,14 +19,19 @@ public class ControllerCraft implements EventHandler {
     ViewCraft view = new ViewCraft(this, mdl);
     int ti = 48;
 	int tc = ti + 10;
+	// Cette chaine stocke les caractéristiques d'une case vide.
+	String basePan = "-fx-border-color: WHITE;-fx-background-color: rgb(180, 180, 180);-fx-background-radius: 2; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.9), 1, 0, 0, 1); -fx-font-size:10;";
+
 	
 	
 	Item vide = new Item("vide");				// Vide
 	Item rock = new Item("rock");				// Pierre
+	Item stick = new Item("stick");				// Stick
+	Item woodenPlank = new Item("woodenPlank");				// Stick
 	Item zoneCraft = new Item("zoneCraft");		// ZoneCraft
 	
-	Item[][] matCraft = 	{	{rock,vide,vide},	 
-							{vide,vide,vide}, 	
+	Item[][] matCraft = 	{	{woodenPlank,woodenPlank,woodenPlank},	 
+							{vide,stick,vide}, 	
 							{vide,vide,vide}
 						};
 
@@ -50,8 +55,6 @@ public class ControllerCraft implements EventHandler {
 		VIDE.setPrefSize(tc,tc);
 		// On initialise, la zone de craft, avec une recette de craft emplie d'objets vide.
 		zoneCraft.howToCraft(new Item[][]	{{vide,vide,vide}								,{vide,vide,vide}						,{vide,vide,vide}});
-		// Cette chaine stocke les caractéristiques d'une case vide.
-		String basePan = "-fx-border-color: WHITE;-fx-background-color: rgb(180, 180, 180);-fx-background-radius: 2; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.9), 1, 0, 0, 1); -fx-font-size:10;";
 		// Création des cases
 		for (int i = 0; i < tabP.length; i++) {
 			for (int j = 0; j < tabP.length; j++) {
@@ -78,11 +81,9 @@ public class ControllerCraft implements EventHandler {
 		view.craftTable.grid.add(VIDE, 3, 1, 1, 1);
 		
 		// Gestion de l'inventaire du bas.
-	    //view.invPlayer.matrice = mdl.listeItems;
-		ArrayList<ArrayList<Item>> po = new ArrayList< ArrayList<Item> > ();
 		
 		System.out.println(mdl.listeItems.size());
-
+		
 		ArrayList<Item> ligne = new ArrayList<Item>();
 	    for (int i = 0; i <  mdl.listeItems.size(); i++) {
 	    	if (i != 0)
@@ -96,9 +97,17 @@ public class ControllerCraft implements EventHandler {
 	    	}
 	    }
 	    view.invPlayer.matrice.add(ligne);
-	    System.out.println(view.invPlayer.matrice);
-		//
-        majTable();
+	    for (int i = 0; i < view.invPlayer.matrice.size(); i++) {
+	    	for (int j = 0; j < view.invPlayer.matrice.get(0).size(); j++) {
+	    		System.out.println(view.invPlayer.matrice + " : " +view.invPlayer.matrice.get(i).get(j));
+			}
+		}
+	    
+	    
+	    createInv();
+	    view.invPlayer.majInv();
+	    majTable();
+        
         
     }
 
@@ -139,9 +148,45 @@ public class ControllerCraft implements EventHandler {
 		zoneCraft.howToCraft(matCraft);
 		res.getChildren().clear();
 		if (mdl.codeCraft.get(zoneCraft.craftCode) != null) {
-			System.out.println(mdl.codeCraft.get(zoneCraft.craftCode).get(0));
 			Item resultat = new Item(mdl.codeCraft.get(zoneCraft.craftCode).get(0).nom);
 			res.getChildren().add(resultat);
 		}
+	}
+    
+    public void createInv() {
+    	
+    	ArrayList<Pane> ligne = new ArrayList<Pane>();
+		for (int i=0;i<view.invPlayer.ncol * view.invPlayer.nlig;i++) {
+				int x =  i%view.invPlayer.ncol;
+				int y = ((int)i/view.invPlayer.ncol) + 1;
+				PaneItem k = new PaneItem(x,y);
+				k.setStyle(basePan);
+			
+		    	if ( i % view.invPlayer.ncol   == 0  && i != 0) {
+		    		
+		    		view.invPlayer.tabP.add(ligne);
+		    		ligne = new ArrayList<Pane>();
+		    	}
+		    	else {
+		    		k.setPrefSize(tc,tc);
+					k.setMaxSize(tc, tc);
+					view.invPlayer.gridPane.add(k,x ,y  );
+					k.setOnMousePressed(event -> {
+						System.out.println(k.i +" kikj "+ k.j);
+						if ((k.i - 1) * view.invPlayer.ncol + k.j < mdl.listeItems.size()) {
+							dragImage = view.invPlayer.matrice.get(k.i - 1).get(k.j).nom;
+						}
+						else {
+							dragImage = mdl.vide.nom;
+						}
+						//
+			    	});
+		    		ligne.add(k);
+		    	}
+
+				
+			
+		}
+		System.out.println("tabP : " + view.invPlayer.tabP);
 	}
 }
