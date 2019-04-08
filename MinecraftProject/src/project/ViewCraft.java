@@ -17,7 +17,7 @@ public class ViewCraft extends BorderPane {
     VCTable craftTable = new VCTable();
     Pane Q = new Pane();
 
-    public ViewCraft(final ControllerCraft controllerC, Modele mdl) {
+    public ViewCraft(ControllerCraft controllerC, Modele mdl) {
     	BMenu.setOnAction(controllerC);
     	BQuit.setOnAction(controllerC);
    	

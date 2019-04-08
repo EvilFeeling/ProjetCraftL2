@@ -17,7 +17,7 @@ public class VCRight extends GridPane{
 	public VCRight(){
 		
 		Class<?> clazz = this.getClass();
-        InputStream input = clazz.getResourceAsStream("/images/axe.png");
+        InputStream input = clazz.getResourceAsStream("/images/stick.png");
         ImageView img = new ImageView(new Image(input));
      // Position
         

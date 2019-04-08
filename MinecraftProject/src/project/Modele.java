@@ -9,16 +9,22 @@ public class Modele extends Application {
 	
 	// Gestion Objets
 	ArrayList<Item> listeItems = new ArrayList<Item>();
-	Item zoneCraft = new Item("zoneCraft");		// ZoneCraft
-	Item vide = new Item("vide");				// Vide
-	Item stick = new Item("stick");				// Baton
-	Item lever = new Item("lever");				// Levier
-	Item rock = new Item("rock");				// Pierre
-	Item woodenPlank = new Item("woodenPlank");	// Planche
-	Item pick = new Item("pick");				// Pioche
-	Item axe = new Item("axe");					// Hache
-	Item slabs = new Item("slabs");				// Plancher
-	Item stone_sword = new Item("stone_sword");	// epe en piere
+	Item zoneCraft = new Item("zoneCraft");					// ZoneCraft
+	Item vide = new Item("vide");							// Vide
+	Item stick = new Item("stick");							// Baton
+	Item lever = new Item("lever");							// Levier
+	Item rock = new Item("rock");							// Pierre
+	Item wood_plank = new Item("wood_plank");				// Planche
+	Item wooden_pickaxe = new Item("wooden_pickaxe");		// Pioche
+	Item wooden_axe = new Item("wooden_axe");				// Hache
+	Item wood_slab = new Item("wood_slab");					// Plancher
+	Item stone_sword = new Item("stone_sword");				// Epee en piere
+	Item stone_pickaxe = new Item("stone_pickaxe");			// pioche en piere
+	Item stone_axe = new Item("stone_axe");					// Hache en piere
+	Item stone_shovel = new Item("stone_shovel");			// Pelle en piere
+	Item aok_fence_gate = new Item("aok_fence_gate");		// Porte en bois
+	Item aok_fence = new Item("aok_fence");					// Barrière en bois
+	
 	codeCraft_HashMap codeCraft = new codeCraft_HashMap ();
 	
     public static void main(final String[] args) {
@@ -28,32 +34,40 @@ public class Modele extends Application {
 
     @Override
     public void init() {
-    	listeItems.add(vide);listeItems.add(stick);listeItems.add(lever);listeItems.add(rock);listeItems.add(woodenPlank);listeItems.add(pick);listeItems.add(axe);listeItems.add(slabs);
-		System.out.print("Le résultat de recherche:");
+    	
+    	zoneCraft.howToCraft(new Item[][]			{{vide,vide,vide}								,{wood_plank,wood_plank,wood_plank}		,{vide,vide,vide}});
+
+		stick.howToCraft(	new Item[][]			{{wood_plank}									,{wood_plank}});
+		wooden_axe.howToCraft(		new Item[][]	{{wood_plank,wood_plank}						,{wood_plank,stick}						,{vide,stick}});
+		wooden_pickaxe.howToCraft(	new Item[][]	{{wood_plank,wood_plank,wood_plank}				,{vide,stick,vide}						,{vide,stick,vide}});
+		lever.howToCraft(	new Item[][]			{{rock}											,{stick}});
+		wood_slab.howToCraft(	new Item[][]		{{wood_plank,wood_plank,wood_plank}});
+		
+		stone_sword.howToCraft(	new Item[][]		{{rock}											,{rock}						,{stick}});
+		stone_pickaxe.howToCraft(	new Item[][]	{{rock,rock,rock}								,{vide,stick,vide}						,{vide,stick,vide}});
+		stone_axe.howToCraft(	new Item[][]		{{rock,rock}									,{rock,stick}						,{vide,stick}});
+		stone_shovel.howToCraft(	new Item[][]	{{rock}											,{stick}						,{stick}});
+		aok_fence_gate.howToCraft(	new Item[][]	{{stick,wood_plank,stick}						,{stick,wood_plank,stick}});
+		aok_fence.howToCraft(	new Item[][]		{{wood_plank,stick,wood_plank}					,{wood_plank,stick,wood_plank}});
+		// Ligne 1 A ajouter à la liste d'objets
+		ajouterAll(new Item[] {vide, stick, lever,rock,wood_plank,wooden_pickaxe,wooden_axe,wood_slab,stone_sword,stone_pickaxe,stone_axe,stone_shovel,aok_fence_gate,aok_fence,vide});
+    	// Ligne 2
+		ajouterAll(new Item[] {vide, stick, lever,rock,wood_plank,wooden_pickaxe,wooden_axe,wood_slab,stone_sword,stone_pickaxe,stone_axe,stone_shovel,aok_fence_gate,aok_fence,vide});
+
+
+    	
+    	System.out.print("Le résultat de recherche:");
 		System.out.println(this.recherche("o"));
 		
 		
-		zoneCraft.howToCraft(new Item[][]	{{vide,vide,vide}								,{woodenPlank,woodenPlank,woodenPlank}	,{vide,vide,vide}});
-
-		stick.howToCraft(	new Item[][]	{{woodenPlank}									,{woodenPlank}});
-		axe.howToCraft(		new Item[][]	{{woodenPlank,woodenPlank}						,{woodenPlank,stick}					,{vide,stick}});
-		pick.howToCraft(	new Item[][]	{{woodenPlank,woodenPlank,woodenPlank}			,{vide,stick,vide}						,{vide,stick,vide}});
-		lever.howToCraft(	new Item[][]	{{rock}											,{stick}});
-		slabs.howToCraft(	new Item[][]	{{woodenPlank,woodenPlank,woodenPlank}});
-		
-
-		codeCraft.addVal(stick.craftCode,stick);
-		codeCraft.addVal(axe.craftCode,axe);
-		codeCraft.addVal(pick.craftCode,pick);
-		codeCraft.addVal(lever.craftCode,lever);
-		codeCraft.addVal(slabs.craftCode,slabs);
+			
 		
 		
 		System.out.println(codeCraft.get(lever.craftCode));
 		System.out.println(zoneCraft.craftList);
 		
-		System.out.println(slabs.craftList);
-		System.out.println("slabs" + slabs.craftCode);
+		System.out.println(wood_slab.craftList);
+		System.out.println("slabs" + wood_slab.craftCode);
 		
 		
 		//zoneCraft.howToCraft(zoneCraft.craftList);
@@ -76,7 +90,19 @@ public class Modele extends Application {
 		
 		return res;
 	}
-    
+	// Va ajouter un objet à la base de donnée, obj, défini l'objet à ajouter et craftable si l'objet est craftable ou non.
+    public void ajouterObjet(Item obj) {
+    	listeItems.add(obj);
+    	codeCraft.addVal(obj);
+    	
+    }
+    public void ajouterAll(Item[] listObj) {
+    	for (int i = 0; i < listObj.length; i++) {
+    		listeItems.add(listObj[i]);
+    		codeCraft.addVal(listObj[i]);
+		}
+    	
+    }
 
     @Override
     public void start(final Stage primaryStage) throws Exception {

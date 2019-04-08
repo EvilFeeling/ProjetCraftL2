@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -25,16 +26,15 @@ public class VCIPlayer extends ScrollPane{
 	//Creating a Grid Pane 
 	GridPane gridPane =new GridPane();	
 	
-	ArrayList<ArrayList<Item>> matrice = new ArrayList< ArrayList<Item> > ();
 
-	ArrayList<ArrayList<Pane>> tabP = new ArrayList<ArrayList<Pane>>();
+	ArrayList<ArrayList<PaneItem>> tabP = new ArrayList<ArrayList<PaneItem>>();
 	
 	
 	public VCIPlayer() {
 		this.setPrefSize(1000, 175);
 		this.setStyle("-fx-background-color:pink;");
 		//creating label rechercher 
-		Text text1 = new Text("Rechercher :");   
+		Button search = new Button("Rechercher :");   
 
 
 		//Creating Text Filed for rechercher        
@@ -50,14 +50,9 @@ public class VCIPlayer extends ScrollPane{
 		//Setting the Grid alignment 
 		gridPane.setAlignment(Pos.TOP_LEFT);
 
-		//Arranging all the nodes in the grid 
-		String chaine = "-fx-border-color: WHITE;-fx-background-color: rgb(180, 180, 180);-fx-background-radius: 2; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.9), 1, 0, 0, 1); -fx-font-size:10;";
-
-
 		gridPane.setPadding(new Insets(20, 10, 10, 10));
-		GridPane gridpane = new GridPane();
 
-		gridPane.add(text1, 0, 0 ); 
+		gridPane.add(search, 0, 0 ); 
 		gridPane.add(textField1, 1, 0);
 		
 		for (int i = 0; i < ncol; i++) {
@@ -72,15 +67,5 @@ public class VCIPlayer extends ScrollPane{
 
 	} 
 	
-	public void majInv() {
-		for (int i=0;i<matrice.size();i++) {
-			for (int j = 0; j < matrice.get(i).size(); j++) {
-					Item img = matrice.get(i).get(j);
-					System.out.println(tabP.get(i).get(j) + " " +img);
-					tabP.get(i).get(j).getChildren().clear();
-					tabP.get(i).get(j).getChildren().add(img);
-			}
-		}
-	}
 	
 }

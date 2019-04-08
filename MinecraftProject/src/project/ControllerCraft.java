@@ -22,15 +22,15 @@ public class ControllerCraft implements EventHandler {
 	// Cette chaine stocke les caractéristiques d'une case vide.
 	String basePan = "-fx-border-color: WHITE;-fx-background-color: rgb(180, 180, 180);-fx-background-radius: 2; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.9), 1, 0, 0, 1); -fx-font-size:10;";
 
-	
+	Item zoneCraft = new Item("zoneCraft");		// ZoneCraft
 	
 	Item vide = new Item("vide");				// Vide
 	Item rock = new Item("rock");				// Pierre
 	Item stick = new Item("stick");				// Stick
-	Item woodenPlank = new Item("woodenPlank");				// Stick
-	Item zoneCraft = new Item("zoneCraft");		// ZoneCraft
+	Item wood_plank = new Item("wood_plank");	// Planche
 	
-	Item[][] matCraft = 	{	{woodenPlank,woodenPlank,woodenPlank},	 
+	
+	Item[][] matCraft = 	{	{wood_plank,wood_plank,wood_plank},	 
 							{vide,stick,vide}, 	
 							{vide,vide,vide}
 						};
@@ -77,35 +77,21 @@ public class ControllerCraft implements EventHandler {
 		// Init de la case de résultat
 		res.setStyle(basePan);
 		res.setPrefSize(tc,tc);
+		res.setOnMousePressed(event -> {
+			System.out.println("a");
+			if (res.getChildren().size() > 0) {
+				dragImage = ((Item)res.getChildren().get(0)).nom;
+			}
+			
+			//
+		});
+		
 		view.craftTable.grid.add(res,4 ,1,1,1 );
 		view.craftTable.grid.add(VIDE, 3, 1, 1, 1);
 		
 		// Gestion de l'inventaire du bas.
-		
-		System.out.println(mdl.listeItems.size());
-		
-		ArrayList<Item> ligne = new ArrayList<Item>();
-	    for (int i = 0; i <  mdl.listeItems.size(); i++) {
-	    	if (i != 0)
-	    		System.out.println(i + ":" + i % view.invPlayer.ncol);
-	    	if (i != 0 && i % view.invPlayer.ncol  == 0  ) {
-	    		view.invPlayer.matrice.add(ligne);
-	    		ligne = new ArrayList<Item>();
-	    	}
-	    	else {
-	    		ligne.add(mdl.listeItems.get(i));
-	    	}
-	    }
-	    view.invPlayer.matrice.add(ligne);
-	    for (int i = 0; i < view.invPlayer.matrice.size(); i++) {
-	    	for (int j = 0; j < view.invPlayer.matrice.get(0).size(); j++) {
-	    		System.out.println(view.invPlayer.matrice + " : " +view.invPlayer.matrice.get(i).get(j));
-			}
-		}
-	    
-	    
 	    createInv();
-	    view.invPlayer.majInv();
+	    // Fin gestion inv bas
 	    majTable();
         
         
@@ -118,8 +104,8 @@ public class ControllerCraft implements EventHandler {
         if (source.getText() == "Menu") {
             System.out.println("ButtonA has been pressed, switching to ViewB.");
 
-            final ControllerMenu controllerM = new ControllerMenu(primaryStage,mdl);
-            final Scene scene = new Scene(controllerM.getView());
+            ControllerMenu controllerM = new ControllerMenu(primaryStage,mdl);
+            Scene scene = new Scene(controllerM.getView());
             primaryStage.setScene(scene);
         }
     }
@@ -150,43 +136,37 @@ public class ControllerCraft implements EventHandler {
 		if (mdl.codeCraft.get(zoneCraft.craftCode) != null) {
 			Item resultat = new Item(mdl.codeCraft.get(zoneCraft.craftCode).get(0).nom);
 			res.getChildren().add(resultat);
+			
 		}
 	}
     
     public void createInv() {
     	
-    	ArrayList<Pane> ligne = new ArrayList<Pane>();
-		for (int i=0;i<view.invPlayer.ncol * view.invPlayer.nlig;i++) {
-				int x =  i%view.invPlayer.ncol;
-				int y = ((int)i/view.invPlayer.ncol) + 1;
-				PaneItem k = new PaneItem(x,y);
+    	ArrayList<PaneItem> ligne = new ArrayList<PaneItem>();
+		for (int i=0;i<view.invPlayer.nlig ;i++) {
+			
+			for (int j = 0; j < view.invPlayer.ncol ; j++) {
+				PaneItem k = new PaneItem(i,j);
 				k.setStyle(basePan);
-			
-		    	if ( i % view.invPlayer.ncol   == 0  && i != 0) {
-		    		
-		    		view.invPlayer.tabP.add(ligne);
-		    		ligne = new ArrayList<Pane>();
-		    	}
-		    	else {
-		    		k.setPrefSize(tc,tc);
-					k.setMaxSize(tc, tc);
-					view.invPlayer.gridPane.add(k,x ,y  );
-					k.setOnMousePressed(event -> {
-						System.out.println(k.i +" kikj "+ k.j);
-						if ((k.i - 1) * view.invPlayer.ncol + k.j < mdl.listeItems.size()) {
-							dragImage = view.invPlayer.matrice.get(k.i - 1).get(k.j).nom;
-						}
-						else {
-							dragImage = mdl.vide.nom;
-						}
-						//
-			    	});
-		    		ligne.add(k);
-		    	}
-
-				
-			
+				k.setPrefSize(tc,tc);
+				k.setMaxSize(tc, tc);
+				if (i * view.invPlayer.ncol  + j < mdl.listeItems.size()) {
+					k.nom = mdl.listeItems.get(i * view.invPlayer.ncol  + j).nom;
+				}		
+				else {
+					k.nom = "vide";
+				}
+				Item img = new Item(k.nom);
+				k.getChildren().add(img);
+				view.invPlayer.gridPane.add(k,j ,i + 1 );
+				k.setOnMousePressed(event -> {
+					dragImage = k.nom;
+				});
+	    		ligne.add(k);
+			}
+			view.invPlayer.tabP.add(ligne);
+			ligne = new ArrayList<PaneItem>();
+		
 		}
-		System.out.println("tabP : " + view.invPlayer.tabP);
 	}
 }
