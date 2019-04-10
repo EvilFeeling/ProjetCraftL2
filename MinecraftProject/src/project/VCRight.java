@@ -25,19 +25,19 @@ public class VCRight extends GridPane{
         img.setFitHeight(34); 
         img.setFitWidth(34); 
         
-		this.setStyle("-fx-background-color:purple;");
+		//this.setStyle("-fx-background-color:purple;");
 		this.setPrefSize(48 * 4, 48 * 5);
 		//this.setAlignment(Pos.CENTER);
 		
-		// Zone où placer l'item pour demander sa recette.
+		// Zone oï¿½ placer l'item pour demander sa recette.
 		Pane itemRec = new Pane();
-		// Pour mettre une taille précise
+		// Pour mettre une taille prï¿½cise
 		itemRec.setMinSize(50, 50);
 		itemRec.setMaxSize(50, 50);
 		itemRec.setStyle("-fx-background-color:#999;");
-		// Zone où placer l'item pour demander son arborescence.
+		// Zone oï¿½ placer l'item pour demander son arborescence.
 		Pane itemArb = new Pane();
-		// Pour mettre une taille précise
+		// Pour mettre une taille prï¿½cise
 		itemArb.setMinSize(50, 50);
 		itemArb.setMaxSize(50, 50);
 		itemArb.setStyle("-fx-background-color:#999;");

@@ -1,15 +1,14 @@
 package project;
-import javafx.event.EventHandler;
-
-
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.image.Image;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.event.ActionEvent;
 public class ViewCraft extends BorderPane {
     Button BMenu = new Button("Menu");
     Button BQuit = new Button("Quitter");
@@ -21,19 +20,22 @@ public class ViewCraft extends BorderPane {
     VCIPlayer invPlayer = new VCIPlayer();
     VCInv invCrea = new VCInv();
     VCTable craftTable = new VCTable();
-    Pane Q = new Pane();
 
     public ViewCraft(ControllerCraft controllerC, Modele mdl) {
     	BMenu.setOnAction(controllerC);
     	BQuit.setOnAction(controllerC);
     	search.setOnAction(controllerC);
     	textField1.setPrefWidth(80);
-   	
-    	this.setStyle("-fx-background-color:#AAA;");
-		
+    	BackgroundSize bgs = new BackgroundSize(5,5,false,false,false,false);
+    	BackgroundImage bgi = new BackgroundImage(new Image("images/aze.png"), null, null, null, bgs);
+    	Background bg = new Background(bgi);
+    
+    	this.setBackground(bg);
+//    	this.setStyle("-fx-background-color:#AAA;");
+    	
 		//Top
 		GridPane head = new GridPane();
-		head.setStyle("-fx-background-color:orange;");
+		//head.setStyle("-fx-background-color:orange;");
 		head.setPrefHeight(75);
 		head.setPadding(new Insets(10, 10, 10, 10));		
 		head.add(BMenu,0,1);
@@ -42,11 +44,11 @@ public class ViewCraft extends BorderPane {
 		
 		// Left
 		Pane left = new Pane();
-		left.setStyle("-fx-background-color:red;");
+		//left.setStyle("-fx-background-color:red;");
 		left.setPrefSize(300, 200);
 		
 		
-		invCrea.setStyle("-fx-background-color:purple;");
+		//invCrea.setStyle("-fx-background-color:purple;");
 		invCrea.setPrefSize(230, invCrea.ti * 5);
 		left.getChildren().add(invCrea);
 		//left.setAlignment(invCrea, Pos.CENTER_LEFT);
@@ -54,7 +56,7 @@ public class ViewCraft extends BorderPane {
 		
 		//Bottom
 		Pane bottom = new Pane();
-		bottom.setStyle("-fx-background-color:#DDD;");
+		//bottom.setStyle("-fx-background-color:#DDD;");
 		bottom.setPrefHeight(180);
 		
 		
@@ -68,7 +70,7 @@ public class ViewCraft extends BorderPane {
 		
 		// Center
 		Pane center = new Pane();
-		center.setStyle("-fx-background-color:#500;");
+		//center.setStyle("-fx-background-color:#500;");
 		center.setPrefSize(350, 250);
 		
 		
@@ -78,7 +80,7 @@ public class ViewCraft extends BorderPane {
 		
 		//Right
 		Pane right = new Pane();
-		right.setStyle("-fx-background-color:#111;");
+		//right.setStyle("-fx-background-color:#111;");
 		right.setPrefSize(300, 200);
 		
 		VCRight vcRight = new VCRight();

@@ -16,7 +16,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.text.Text;
 
-// Va génerer la zone d'inventaire du player
+// Va gï¿½nerer la zone d'inventaire du player
 public class VCInv extends ScrollPane{
 	int ti = 48;
 	int tc = ti + 10;
@@ -31,8 +31,7 @@ public class VCInv extends ScrollPane{
 	
 	
 	public VCInv() {
-		this.setPrefSize(1000, 175);
-		this.setStyle("-fx-background-color:pink;");
+		//this.setStyle("-fx-background-color:pink;");
 
 		//Setting the vertical and horizontal gaps between the columns 
 		gridPane.setVgap(5); 

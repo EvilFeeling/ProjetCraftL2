@@ -7,8 +7,9 @@ import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.control.Button;
-
+import javafx.scene.effect.InnerShadow;
 import javafx.stage.Stage;
 
 public class ControllerCraft implements EventHandler {
@@ -19,8 +20,9 @@ public class ControllerCraft implements EventHandler {
     ViewCraft view = new ViewCraft(this, mdl);
     int ti = 48;
 	int tc = ti + 10;
-	// Cette chaine stocke les caractéristiques d'une case vide.
-	String basePan = "-fx-border-color: WHITE;-fx-background-color: rgb(180, 180, 180);-fx-background-radius: 2; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.9), 1, 0, 0, 1); -fx-font-size:10;";
+	// Cette chaine stocke les caractï¿½ristiques d'une case vide.
+	String basePan = "-fx-border-color: WHITE;-fx-background-color: #c6c6c6; -fx-effect: innershadow( three-pass-box, rgba( 0, 0, 0, 0.5 ), 10, 0.2, 1, 1 ); -fx-font-size:10;";
+	
 
 	Item zoneCraft = new Item("zoneCraft");		// ZoneCraft
 	
@@ -46,18 +48,20 @@ public class ControllerCraft implements EventHandler {
     	// Initialisation du controlleur.
         this.primaryStage = primaryStage;
         this.mdl = modl;
-        System.out.println();
         
     	
     	// Gestion de la table de Craft
     	Pane VIDE= new Pane ();
-    	VIDE.setStyle("-fx-border-color: white; -fx-font-size:10;");
+    	VIDE.setStyle(" -fx-font-size:10;");
 		VIDE.setPrefSize(tc,tc);
 		// On initialise, la zone de craft, avec une recette de craft emplie d'objets vide.
 		zoneCraft.howToCraft(new Item[][]	{{vide,vide,vide}								,{vide,vide,vide}						,{vide,vide,vide}});
-		// Création des cases
+		
+		
+		// Crï¿½ation des cases
 		for (int i = 0; i < tabP.length; i++) {
 			for (int j = 0; j < tabP.length; j++) {
+				
 				tabP[i][j].setStyle(basePan);
 				tabP[i][j].setMaxSize(tc,tc);
 				tabP[i][j].setMinSize(tc,tc);
@@ -74,7 +78,7 @@ public class ControllerCraft implements EventHandler {
 				
 			}
 		}
-		// Init de la case de résultat
+		// Init de la case de rï¿½sultat
 		res.setStyle(basePan);
 		res.setPrefSize(tc,tc);
 		res.setOnMousePressed(event -> {
@@ -121,9 +125,9 @@ public class ControllerCraft implements EventHandler {
         return view;
     }
     
-    // Modifie la matrice de VCTable d'après la matrice d'objet
+    // Modifie la matrice de VCTable d'aprï¿½s la matrice d'objet
     public void majTable() {
-		// Modifie l'affichage d'après la matrice.
+		// Modifie l'affichage d'aprï¿½s la matrice.
 		for (int i=0;i<matCraft.length;i++) {
 			for (int j = 0; j < matCraft.length; j++) {
 				if (matCraft[i][j] != vide) {
