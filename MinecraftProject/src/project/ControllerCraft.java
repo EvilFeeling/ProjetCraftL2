@@ -78,19 +78,19 @@ public class ControllerCraft implements EventHandler {
 		res.setStyle(basePan);
 		res.setPrefSize(tc,tc);
 		res.setOnMousePressed(event -> {
-			System.out.println("a");
 			if (res.getChildren().size() > 0) {
 				dragImage = ((Item)res.getChildren().get(0)).nom;
 			}
-			
-			//
+
 		});
 		
 		view.craftTable.grid.add(res,4 ,1,1,1 );
 		view.craftTable.grid.add(VIDE, 3, 1, 1, 1);
 		
 		// Gestion de l'inventaire du bas.
-	    createInv();
+	    majInv(mdl.recherche(""));
+	    // Gestion de l'inventaire du bas.
+	    leftInv();
 	    // Fin gestion inv bas
 	    majTable();
         
@@ -107,6 +107,9 @@ public class ControllerCraft implements EventHandler {
             ControllerMenu controllerM = new ControllerMenu(primaryStage,mdl);
             Scene scene = new Scene(controllerM.getView());
             primaryStage.setScene(scene);
+        }
+        if (source.getText() == "Rechercher :") {
+            majInv(mdl.recherche(view.textField1.getText()));
         }
     }
 
@@ -140,7 +143,7 @@ public class ControllerCraft implements EventHandler {
 		}
 	}
     
-    public void createInv() {
+    public void majInv(ArrayList<Item> listObj) {
     	
     	ArrayList<PaneItem> ligne = new ArrayList<PaneItem>();
 		for (int i=0;i<view.invPlayer.nlig ;i++) {
@@ -150,8 +153,8 @@ public class ControllerCraft implements EventHandler {
 				k.setStyle(basePan);
 				k.setPrefSize(tc,tc);
 				k.setMaxSize(tc, tc);
-				if (i * view.invPlayer.ncol  + j < mdl.listeItems.size()) {
-					k.nom = mdl.listeItems.get(i * view.invPlayer.ncol  + j).nom;
+				if (i * view.invPlayer.ncol  + j < listObj.size()) {
+					k.nom = listObj.get(i * view.invPlayer.ncol  + j).nom;
 				}		
 				else {
 					k.nom = "vide";
@@ -165,6 +168,39 @@ public class ControllerCraft implements EventHandler {
 	    		ligne.add(k);
 			}
 			view.invPlayer.tabP.add(ligne);
+			ligne = new ArrayList<PaneItem>();
+		
+		}
+	}
+    public void leftInv() {
+    	
+    	ArrayList<PaneItem> ligne = new ArrayList<PaneItem>();
+		for (int i=0;i<view.invCrea.nlig ;i++) {
+			
+			for (int j = 0; j < view.invCrea.ncol ; j++) {
+				PaneItem k = new PaneItem(i,j);
+				k.setStyle(basePan);
+				k.setPrefSize(tc,tc);
+				k.setMaxSize(tc, tc);
+				k.nom = "vide";
+				Item img = new Item(k.nom);
+				k.getChildren().add(img);
+				view.invCrea.gridPane.add(k,j ,i + 1 );
+				k.setOnMousePressed(event -> {
+					if (k.nom == "vide") {
+						k.nom = dragImage;
+						Item dimg = new Item(dragImage);
+						k.getChildren().clear();
+						k.getChildren().add(dimg);
+					}
+					else {
+						dragImage = k.nom;
+					}
+					
+				});
+	    		ligne.add(k);
+			}
+			view.invCrea.tabP.add(ligne);
 			ligne = new ArrayList<PaneItem>();
 		
 		}

@@ -128,7 +128,7 @@ public class Item extends ImageView{
 		for (int i = 0; i < this.craftList.size(); i++) {
 			for (int j = 0; j < this.craftList.get(0).size(); j++) {
 				Item k = this.craftList.get(i).get(j);
-				this.craftCode += (i+k.nom).hashCode();
+				this.craftCode += (i*3 + j*20 +k.nom).hashCode();
 			}
 				
 		}

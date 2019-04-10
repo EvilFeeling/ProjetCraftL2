@@ -17,11 +17,11 @@ import javafx.scene.layout.Priority;
 import javafx.scene.text.Text;
 
 // Va génerer la zone d'inventaire du player
-public class VCIPlayer extends ScrollPane{
+public class VCInv extends ScrollPane{
 	int ti = 48;
 	int tc = ti + 10;
-	int ncol = 15;
-	int nlig = 3;
+	int ncol = 3;
+	int nlig = 10;
 	Item vide = new Item("vide");
 	//Creating a Grid Pane 
 	GridPane gridPane =new GridPane();	
@@ -30,28 +30,19 @@ public class VCIPlayer extends ScrollPane{
 	ArrayList<ArrayList<PaneItem>> tabP = new ArrayList<ArrayList<PaneItem>>();
 	
 	
-	public VCIPlayer() {
+	public VCInv() {
 		this.setPrefSize(1000, 175);
-		//this.setStyle("-fx-background-color:pink;");
-		//creating label rechercher 
-		
-
-
-		
-
-		
+		this.setStyle("-fx-background-color:pink;");
 
 		//Setting the vertical and horizontal gaps between the columns 
 		gridPane.setVgap(5); 
 		gridPane.setHgap(5);       
 
 		//Setting the Grid alignment 
-		gridPane.setAlignment(Pos.BOTTOM_LEFT);
+		gridPane.setAlignment(Pos.TOP_LEFT);
 
-		gridPane.setPadding(new Insets(0, 10, 10, 10));
+		gridPane.setPadding(new Insets(20, 10, 10, 10));
 
-
-		
 		
 		for (int i = 0; i < ncol; i++) {
             ColumnConstraints colConst = new ColumnConstraints();

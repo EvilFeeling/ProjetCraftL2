@@ -4,6 +4,7 @@ import javafx.event.EventHandler;
 
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -12,14 +13,21 @@ import javafx.event.ActionEvent;
 public class ViewCraft extends BorderPane {
     Button BMenu = new Button("Menu");
     Button BQuit = new Button("Quitter");
+    Button search = new Button("Rechercher :");  
+	TextField textField1 = new TextField(); 
+  		
+	
     
     VCIPlayer invPlayer = new VCIPlayer();
+    VCInv invCrea = new VCInv();
     VCTable craftTable = new VCTable();
     Pane Q = new Pane();
 
     public ViewCraft(ControllerCraft controllerC, Modele mdl) {
     	BMenu.setOnAction(controllerC);
     	BQuit.setOnAction(controllerC);
+    	search.setOnAction(controllerC);
+    	textField1.setPrefWidth(80);
    	
     	this.setStyle("-fx-background-color:#AAA;");
 		
@@ -37,21 +45,26 @@ public class ViewCraft extends BorderPane {
 		left.setStyle("-fx-background-color:red;");
 		left.setPrefSize(300, 200);
 		
-		GridPane invCrea = new GridPane();
+		
 		invCrea.setStyle("-fx-background-color:purple;");
-		invCrea.setPrefSize(48 * 4, 48 * 5);
+		invCrea.setPrefSize(230, invCrea.ti * 5);
 		left.getChildren().add(invCrea);
 		//left.setAlignment(invCrea, Pos.CENTER_LEFT);
 		
 		
 		//Bottom
 		Pane bottom = new Pane();
-		bottom.setStyle("-fx-background-color:blue;");
+		bottom.setStyle("-fx-background-color:#DDD;");
 		bottom.setPrefHeight(180);
 		
 		
 		
+		bottom.getChildren().add(search);
+		textField1.setLayoutX(90);
+		invPlayer.setLayoutY(30);
+		bottom.getChildren().add(textField1);
 		bottom.getChildren().add(invPlayer);
+		
 		
 		// Center
 		Pane center = new Pane();
