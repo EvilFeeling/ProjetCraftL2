@@ -23,8 +23,7 @@ public class Modele extends Application {
 	Item stone_axe = new Item("stone_axe");					// Hache en piere
 	Item stone_shovel = new Item("stone_shovel");			// Pelle en piere
 	Item aok_fence_gate = new Item("aok_fence_gate");		// Porte en bois
-	Item aok_fence = new Item("aok_fence");					// Barrière en bois
-	
+	Item aok_fence = new Item("aok_fence");					// Barriï¿½re en bois
 	Item wood = new Item("wood");							// bois
 	Item chest = new Item("chest");							// bois
 	Item crafting_table = new Item("crafting_table");		// table craft
@@ -32,6 +31,8 @@ public class Modele extends Application {
 	Item cobblestone_slab = new Item("cobblestone_slab");		// plancher pierre
 	Item cobblestone_wall = new Item("cobblestone_wall");		// mur pierre
 	Item sign = new Item("sign");							// panneau
+	
+	Item watch = new Item("watch");							// montre
 
 	
 	codeCraft_HashMap codeCraft = new codeCraft_HashMap ();
@@ -68,14 +69,14 @@ public class Modele extends Application {
 
 		
 		
-		// Ligne 1 A ajouter à la liste d'objets
+		// Ligne 1 A ajouter ï¿½ la liste d'objets
 		ajouterAll(new Item[] { stick, lever,rock,wood_plank,wooden_pickaxe,wooden_axe,wood_slab,stone_sword,stone_pickaxe,stone_axe,stone_shovel,aok_fence_gate,aok_fence,vide});
     	// Ligne 2
-		ajouterAll(new Item[] { chest, crafting_table,furnace,cobblestone_slab,cobblestone_wall,sign,wood,vide,vide,vide,vide,aok_fence_gate,aok_fence,vide});
+		ajouterAll(new Item[] { chest, crafting_table,furnace,cobblestone_slab,cobblestone_wall,sign,wood,watch,vide,vide,vide,aok_fence_gate,aok_fence,vide});
 
 
     	
-    	System.out.print("Le résultat de recherche:");
+    	System.out.print("Le rï¿½sultat de recherche:");
 		System.out.println(this.recherche("s"));
 		
 		
@@ -110,7 +111,7 @@ public class Modele extends Application {
 		
 		return res;
 	}
-	// Va ajouter un objet à la base de donnée, obj, défini l'objet à ajouter et craftable si l'objet est craftable ou non.
+	// Va ajouter un objet ï¿½ la base de donnï¿½e, obj, dï¿½fini l'objet ï¿½ ajouter et craftable si l'objet est craftable ou non.
     public void ajouterObjet(Item obj) {
     	listeItems.add(obj);
     	codeCraft.addVal(obj);

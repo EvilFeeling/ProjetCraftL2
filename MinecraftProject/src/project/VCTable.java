@@ -24,7 +24,7 @@ public class VCTable extends Pane {
 		grid.setPadding(new Insets(10, 10, 10, 10));
 
 		this.getChildren().add(grid);
-			
+		
 	}
 	
 	

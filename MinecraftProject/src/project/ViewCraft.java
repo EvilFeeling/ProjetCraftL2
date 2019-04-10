@@ -26,8 +26,8 @@ public class ViewCraft extends BorderPane {
     	BQuit.setOnAction(controllerC);
     	search.setOnAction(controllerC);
     	textField1.setPrefWidth(80);
-    	BackgroundSize bgs = new BackgroundSize(5,5,false,false,false,false);
-    	BackgroundImage bgi = new BackgroundImage(new Image("images/aze.png"), null, null, null, bgs);
+    	BackgroundSize bgs = new BackgroundSize(1000,500,false,false,false,false);
+    	BackgroundImage bgi = new BackgroundImage(new Image("images/background.png"), null, null, null, bgs);
     	Background bg = new Background(bgi);
     
     	this.setBackground(bg);
