@@ -154,7 +154,7 @@ redstone
 rock
 feather
 sugarcane
-string***
+string**
 
 
 //objet secondaire:
