@@ -95,7 +95,7 @@ public class ControllerCraft implements EventHandler {
 		view.craftTable.grid.add(VIDE, 3, 1, 1, 1);
 		
 		// Gestion de l'inventaire du bas.
-	    majInv(mdl.recherche("st"));
+	    majInv(mdl.recherche(""));
 	    // Gestion de l'inventaire du bas.
 	    leftInv();
 	    // Fin gestion inv bas
@@ -226,7 +226,8 @@ public class ControllerCraft implements EventHandler {
 		rec.setPrefSize(tc,tc);
 		rec.setMaxSize(tc, tc);
 		rec.nom = "vide";
-		view.vcRight.add(rec,2,2);
+		rec.relocate(30, 30);
+		
 		rec.setOnMousePressed(event -> {
 			rec.nom = dragImage;
 			Item dimg = new Item(dragImage);
@@ -236,12 +237,13 @@ public class ControllerCraft implements EventHandler {
 		arb.setPrefSize(tc,tc);
 		arb.setMaxSize(tc, tc);
 		arb.nom = "vide";
-		view.vcRight.add(arb,2,5);
+		arb.relocate(30, 150);
 		arb.setOnMousePressed(event -> {
 			arb.nom = dragImage;
 			Item dimg = new Item(dragImage);
 			arb.getChildren().clear();
 			arb.getChildren().add(dimg);		});
+		view.vcRight.getChildren().addAll(rec,arb);
     }
     
     public void affRecette(String n) {
@@ -260,6 +262,7 @@ public class ControllerCraft implements EventHandler {
     }
     public void affArbo(String n) {
     	ViewArbo centerView = new ViewArbo();
-    	this.view.setCenter(centerView);
+    	
+    	//this.view.setCenter(centerView);
     }
 }

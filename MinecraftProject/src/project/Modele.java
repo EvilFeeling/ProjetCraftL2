@@ -24,30 +24,6 @@ public class Modele extends Application {
 	
 	// Gestion Objets
 	String listeItems = "";
-	Item zoneCraft = new Item("zoneCraft");					// ZoneCraft
-	
-	Item wood = new Item("wood");							// Vide
-	Item coal = new Item("coal");							// Vide
-	Item flint = new Item("flint");							// Vide
-	Item gold = new Item("gold");							// Vide
-	Item iron = new Item("iron");							// Vide
-	Item leather = new Item("leather");							// Vide
-	Item redstone = new Item("redstone");							// Vide
-	Item rock = new Item("rock");							// Vide
-	Item feather = new Item("feather");							// Vide
-	Item sugarcane = new Item("sugarcane");							// Vide
-	Item string = new Item("string");							// Vide
-	
-	Item diamond = new Item("diamond");							// Vide
-	Item obsidian = new Item("obsidian");							// Vide
-	Item gunpowder = new Item("gunpowder");		
-	Item sand = new Item("sand");	// Vide
-
-
-	Item vide = new Item("vide");							// Vide
-
-
-
 	
 	codeCraft_HashMap codeCraft = new codeCraft_HashMap ();
 	HashMap<String,Item> Items = new HashMap<String,Item>();
@@ -60,41 +36,7 @@ public class Modele extends Application {
     @Override
     public void init() {
 
-    	//Items.put("wood_plank", wood_plank);
-    	Items.put("vide", vide);
-    	Items.put("wood", wood);
-    	Items.put("string", string);
-    	Items.put("flint", flint);
-    	Items.put("coal", coal);
-    	Items.put("gold", gold);
-    	Items.put("iron", iron);
-    	Items.put("leather", leather);
-    	Items.put("feather", feather);
-    	Items.put("redstone", redstone);
-    	Items.put("rock", rock);
-    	Items.put("sugarcane", sugarcane);
-    	
-    	Items.put("diamond", diamond);
-    	Items.put("gunpowder", gunpowder);
-    	Items.put("obsidian", obsidian);
-    	Items.put("sand", sand);
-
-
-
-    	
-
-    	
-    	 
-    	
-    	
-    	
-    	zoneCraft.howToCraft(new Item[][]			{{vide,vide,vide}								,{vide,vide,vide}		,{vide,vide,vide}});
-
     	lireBDD();
-    	System.out.println(Items);
-    	System.out.println(Items.get("wood").Ascendant);
-    	System.out.println(Items.get("wood").Descendant);
-
 		
 	}
 	
@@ -148,33 +90,38 @@ public class Modele extends Application {
         		//System.out.println(ligne);
         		String[] infos = ligne.split(":");
         		String nom = infos[0];
-        		String[] craft = infos[1].split(";");
-        		
-        		ArrayList<ArrayList<Item>> listCraft = new ArrayList<ArrayList<Item>>();
-        		
-        		if (craft.length == 1 && craft[0].length() == 1) {
-        			ArrayList<Item> ligCraft = new ArrayList<Item>();
-        			ligCraft.add(new Item(craft[0]));
-        			listCraft.add(ligCraft);
-	        		
-        		}
-        		else {
-        			for (int i = 0; i < craft.length; i++) {
-	        			String[] ligC = craft[i].split(",") ;
-	        			ArrayList<Item> ligCraft = new ArrayList<Item>();
-			    				
-	    				for (int j = 0; j < ligC.length; j++) {
-	    					ligCraft.add(new Item(ligC[j]));
-						}
-	    				listCraft.add(ligCraft);
-	        		}
-        		}
-    			
         		Item k = new Item(nom);
-        		k.howToCraft(listCraft);
+        		if (infos.length != 1) {
+            		String[] craft = infos[1].split(";");
+            		
+            		ArrayList<ArrayList<Item>> listCraft = new ArrayList<ArrayList<Item>>();
+        			if (craft.length == 1 && craft[0].length() == 1) {
+            			ArrayList<Item> ligCraft = new ArrayList<Item>();
+            			ligCraft.add(new Item(craft[0]));
+            			listCraft.add(ligCraft);
+    	        		
+            		}
+            		else {
+            			for (int i = 0; i < craft.length; i++) {
+    	        			String[] ligC = craft[i].split(",") ;
+    	        			ArrayList<Item> ligCraft = new ArrayList<Item>();
+    			    				
+    	    				for (int j = 0; j < ligC.length; j++) {
+    	    					ligCraft.add(new Item(ligC[j]));
+    						}
+    	    				listCraft.add(ligCraft);
+    	        		}
+        			
+            		k.howToCraft(listCraft);
+            		
+            		
+            		codeCraft.addVal(k);
+        			
+        		}
+        		
+        		}
         		Items.put(nom,k );
         		addFamille(k.nom);
-        		codeCraft.addVal(k);
         		listeItems += nom + ";";
         		
         	}

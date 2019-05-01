@@ -31,7 +31,7 @@ public class VCInv extends ScrollPane{
 	
 	
 	public VCInv() {
-
+		this.setStyle("-fx-background:#DDD");
 		
 
 		//Setting the vertical and horizontal gaps between the columns 

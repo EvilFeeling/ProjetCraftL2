@@ -15,7 +15,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.event.ActionEvent;
-public class ViewCraft extends BorderPane {
+public class ViewCraft extends Pane {
     Button BInfo = new Button("?");
     Button BQuit = new Button("Quitter");
     Button search = new Button("Rechercher :");  
@@ -55,12 +55,14 @@ public class ViewCraft extends BorderPane {
     	//BInfo.setStyle("-fx-border-width:3px;-fx-effect:dropshadow( three-pass-box, rgba( 0, 0, 0, 0.5 ), 10, 0.2, 1, 1 );");
 		head.setLeft(BQuit);
 		head.setRight(BInfo);
+		head.relocate(0, 0);
 		
 		
 		// Left
 		Pane left = new Pane();
 		//left.setStyle("-fx-background-color:red;");
-		left.setPrefSize(300, 350);
+		left.setMaxSize(300, 50);
+		left.relocate(770, 100);
 		
 		
 		//invCrea.setStyle("-fx-background-color:purple;");
@@ -73,6 +75,7 @@ public class ViewCraft extends BorderPane {
 		Pane bottom = new Pane();
 		//bottom.setStyle("-fx-background-color:#DDD;");
 		bottom.setPrefHeight(250);
+		bottom.relocate(0,400);
 		
 		
 		
@@ -87,6 +90,7 @@ public class ViewCraft extends BorderPane {
 		Pane center = new Pane();
 		//center.setStyle("-fx-background-color:#500;");
 		center.setPrefSize(350, 250);
+		center.relocate(325, 100);
 		
 		
 		
@@ -96,15 +100,13 @@ public class ViewCraft extends BorderPane {
 		//Right
 		Pane right = new Pane();
 		//right.setStyle("-fx-background-color:#111;");
-		right.setPrefSize(300, 200);
+		right.setPrefSize(200, 200);
 		
 		right.getChildren().add(vcRight);
+		right.relocate(50, 100);
 		
-		this.setTop(head);
-		this.setBottom(bottom);
-		this.setLeft(right);
-		this.setRight(left);
-		this.setCenter(center);
+		this.getChildren().addAll(head,bottom,right,left,center);
+
     	
     	
  

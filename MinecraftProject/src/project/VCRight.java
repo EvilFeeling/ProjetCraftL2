@@ -13,7 +13,7 @@ import javafx.scene.layout.VBox;
 
 
 
-public class VCRight extends GridPane{
+public class VCRight extends Pane{
 	String basePan = "-fx-border-color: WHITE;-fx-background-color: #c6c6c6; -fx-effect: innershadow( three-pass-box, rgba( 0, 0, 0, 0.5 ), 10, 0.2, 1, 1 ); -fx-font-size:10;";
 	Button BRecette = new Button("Recette");
 	Button BArborescence = new Button("Arborescence");
@@ -36,9 +36,10 @@ public class VCRight extends GridPane{
 		
 
 		this.setPadding(new Insets(10, 10, 10, 10));
-		this.add(BRecette,2,1);
-		
-		this.add(BArborescence,2,3);
+		BRecette.relocate(30,0);
+		BArborescence.relocate(10,120);
+		this.getChildren().addAll(BRecette,BArborescence);
+
 
 		
 	}
