@@ -23,7 +23,6 @@ public class Item extends ImageView{
 	
 	public Item(String n) {
 		this.nom = n;
-		System.out.println(n);
 		Class<?> clazz = this.getClass();
 		InputStream input = clazz.getResourceAsStream("/images/" + n +".png");
 		this.setImage(new Image(input));

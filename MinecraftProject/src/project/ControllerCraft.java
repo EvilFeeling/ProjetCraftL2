@@ -18,6 +18,7 @@ public class ControllerCraft implements EventHandler {
     Modele mdl;
     String dragImage = "stick";
     ViewCraft view = new ViewCraft(this, mdl);
+    PaneItem rec = new PaneItem(0,0);
     int ti = 48;
 	int tc = ti + 10;
 	// Cette chaine stocke les caract�ristiques d'une case vide.
@@ -99,6 +100,8 @@ public class ControllerCraft implements EventHandler {
 	    // Fin gestion inv bas
 	    majTable();
         
+	    rightCraft();
+	    //affRecette("bed");
         
     }
 
@@ -112,6 +115,9 @@ public class ControllerCraft implements EventHandler {
         }
         if (source.getText() == "Rechercher :") {
             majInv(mdl.recherche(view.textField1.getText()));
+        }
+        if (source.getText() == "Recette") {
+        	affRecette(rec.nom);
         }
     }
 
@@ -128,12 +134,12 @@ public class ControllerCraft implements EventHandler {
 		// Modifie l'affichage d'apr�s la matrice.
 		for (int i=0;i<matCraft.length;i++) {
 			for (int j = 0; j < matCraft.length; j++) {
-				if (matCraft[i][j] != vide) {
-					String n = matCraft[i][j].nom;
-					Item img = new Item(n);
-					tabP[i][j].getChildren().clear();
-					tabP[i][j].getChildren().add(img);
-				}
+				
+				String n = matCraft[i][j].nom;
+				Item img = new Item(n);
+				tabP[i][j].getChildren().clear();
+				tabP[i][j].getChildren().add(img);
+				
 			}
 		}
 		zoneCraft.howToCraft(matCraft);
@@ -208,4 +214,35 @@ public class ControllerCraft implements EventHandler {
 		
 		}
 	}
+    
+    public void rightCraft() {
+    	
+		rec.setStyle(basePan);
+		rec.setPrefSize(tc,tc);
+		rec.setMaxSize(tc, tc);
+		rec.nom = "vide";
+		Item img = new Item(rec.nom);
+		rec.getChildren().add(img);
+		view.vcRight.add(rec,2,2);
+		rec.setOnMousePressed(event -> {
+			rec.nom = dragImage;
+			Item dimg = new Item(dragImage);
+			rec.getChildren().clear();
+			rec.getChildren().add(dimg);		});
+    }
+    
+    public void affRecette(String n) {
+    	System.out.println("salutt");
+    	System.out.println(mdl.Items.get((String)n));
+    	ArrayList<ArrayList <Item>> craftRec = mdl.Items.get(n).craftList;
+    	for (int i = 0; i < matCraft.length; i++) {
+    		for (int j = 0; j < matCraft[0].length; j++) {
+    			matCraft[i][j] = vide;
+				if (i < craftRec.size() && j < craftRec.get(0).size()) {
+					matCraft[i][j] = craftRec.get(i).get(j);
+				}
+			}
+		}
+    	majTable();
+    }
 }

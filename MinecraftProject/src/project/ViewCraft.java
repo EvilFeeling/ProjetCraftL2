@@ -26,12 +26,15 @@ public class ViewCraft extends BorderPane {
     VCIPlayer invPlayer = new VCIPlayer();
     VCInv invCrea = new VCInv();
     VCTable craftTable = new VCTable();
+	VCRight vcRight ;
+
     Pane Q = new Pane();
 
     public ViewCraft(ControllerCraft controllerC, Modele mdl) {
     	BInfo.setOnAction(controllerC);
     	BQuit.setOnAction(controllerC);
     	search.setOnAction(controllerC);
+    	vcRight = new VCRight(controllerC);
     	textField1.setPrefWidth(80);
    	
     	//this.setStyle("-fx-background-color:#AAA;");
@@ -95,7 +98,6 @@ public class ViewCraft extends BorderPane {
 		//right.setStyle("-fx-background-color:#111;");
 		right.setPrefSize(300, 200);
 		
-		VCRight vcRight = new VCRight();
 		right.getChildren().add(vcRight);
 		
 		this.setTop(head);
