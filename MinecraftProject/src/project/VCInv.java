@@ -21,7 +21,7 @@ public class VCInv extends ScrollPane{
 	int ti = 48;
 	int tc = ti + 10;
 	int ncol = 3;
-	int nlig = 10;
+	int nlig = 70;
 	Item vide = new Item("vide");
 	//Creating a Grid Pane 
 	GridPane gridPane =new GridPane();	
@@ -31,6 +31,7 @@ public class VCInv extends ScrollPane{
 	
 	
 	public VCInv() {
+
 		//this.setStyle("-fx-background-color:pink;");
 
 		//Setting the vertical and horizontal gaps between the columns 
@@ -40,7 +41,7 @@ public class VCInv extends ScrollPane{
 		//Setting the Grid alignment 
 		gridPane.setAlignment(Pos.TOP_LEFT);
 
-		gridPane.setPadding(new Insets(20, 10, 10, 10));
+		gridPane.setPadding(new Insets(10, 0, 10, 10));
 
 		
 		for (int i = 0; i < ncol; i++) {

@@ -23,7 +23,7 @@ public class Item extends ImageView{
 	
 	public Item(String n) {
 		this.nom = n;
-
+		System.out.println(n);
 		Class<?> clazz = this.getClass();
 		InputStream input = clazz.getResourceAsStream("/images/" + n +".png");
 		this.setImage(new Image(input));
@@ -49,11 +49,12 @@ public class Item extends ImageView{
 		}
 	}
 	
-	public void howToCraft(Object craftList) {
+	public void howToCraft(Object cList) {
 		this.craftList = new ArrayList<ArrayList<Item>>();
 		
-		if (craftList instanceof Item[][]) {			
-			Item[][] list = (Item[][])craftList;
+		
+		if (cList instanceof Item[][]) {			
+			Item[][] list = (Item[][])cList;
 			for (int i = 0; i < list.length; i++) {
 				ArrayList<Item> ligne = new ArrayList<Item>();
 				for (int j = 0; j < list[0].length; j++) {
@@ -65,6 +66,12 @@ public class Item extends ImageView{
 				}
 				this.craftList.add(ligne);
 			}
+			
+		}
+		else if (cList instanceof ArrayList<?>) {
+			ArrayList<ArrayList<Item>> laListe = new ArrayList<ArrayList<Item>>();
+			laListe = (ArrayList<ArrayList<Item>>) cList;
+			this.craftList = laListe;
 			
 		}
 		this.getMinCraft();

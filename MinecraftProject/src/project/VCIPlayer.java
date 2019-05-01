@@ -10,6 +10,9 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -21,7 +24,7 @@ public class VCIPlayer extends ScrollPane{
 	int ti = 48;
 	int tc = ti + 10;
 	int ncol = 15;
-	int nlig = 3;
+	int nlig = 7;
 	Item vide = new Item("vide");
 	//Creating a Grid Pane 
 	GridPane gridPane =new GridPane();	
@@ -31,8 +34,15 @@ public class VCIPlayer extends ScrollPane{
 	
 	
 	public VCIPlayer() {
-		this.setPrefSize(1000, 175);
-		//this.setStyle("-fx-background-color:pink;");
+		this.setPrefSize(1000, 150);
+		BackgroundSize bgs = new BackgroundSize(1000,500,false,false,false,false);
+    	BackgroundImage bgi = new BackgroundImage(new Image("images/background.png"), null, null, null, bgs);
+    	Background bg = new Background(bgi);
+    	this.setBackground(bg);
+    
+		//this.setStyle("-fx-background:grey;");
+		//this.setStyle("-fx-opacity:0.5;");
+		//this.setOpacity(0.5);
 		//creating label rechercher 
 		
 

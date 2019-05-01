@@ -24,15 +24,16 @@ public class ControllerCraft implements EventHandler {
 	String basePan = "-fx-border-color: WHITE;-fx-background-color: #c6c6c6; -fx-effect: innershadow( three-pass-box, rgba( 0, 0, 0, 0.5 ), 10, 0.2, 1, 1 ); -fx-font-size:10;";
 	
 
+
 	Item zoneCraft = new Item("zoneCraft");		// ZoneCraft
 	
 	Item vide = new Item("vide");				// Vide
 	Item rock = new Item("rock");				// Pierre
 	Item stick = new Item("stick");				// Stick
-	Item wood_plank = new Item("wood_plank");	// Planche
+	//Item wood_plank = new Item("wood_plank");	// Planche
 	
 	
-	Item[][] matCraft = 	{	{wood_plank,wood_plank,wood_plank},	 
+	Item[][] matCraft = 	{	{vide,vide,vide},	 
 							{vide,stick,vide}, 	
 							{vide,vide,vide}
 						};
@@ -92,7 +93,7 @@ public class ControllerCraft implements EventHandler {
 		view.craftTable.grid.add(VIDE, 3, 1, 1, 1);
 		
 		// Gestion de l'inventaire du bas.
-	    majInv(mdl.recherche(""));
+	    majInv(mdl.recherche("st"));
 	    // Gestion de l'inventaire du bas.
 	    leftInv();
 	    // Fin gestion inv bas
@@ -103,11 +104,8 @@ public class ControllerCraft implements EventHandler {
 
     @Override
     public void handle(Event event) {
-    	System.out.println("salut");
         final Button source = (Button)event.getSource();
         if (source.getText() == "Menu") {
-            System.out.println("ButtonA has been pressed, switching to ViewB.");
-
             ControllerMenu controllerM = new ControllerMenu(primaryStage,mdl);
             Scene scene = new Scene(controllerM.getView());
             primaryStage.setScene(scene);
@@ -139,6 +137,7 @@ public class ControllerCraft implements EventHandler {
 			}
 		}
 		zoneCraft.howToCraft(matCraft);
+		
 		res.getChildren().clear();
 		if (mdl.codeCraft.get(zoneCraft.craftCode) != null) {
 			Item resultat = new Item(mdl.codeCraft.get(zoneCraft.craftCode).get(0).nom);
