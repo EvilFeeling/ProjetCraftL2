@@ -37,7 +37,7 @@ public class VCInv extends ScrollPane{
 		//Setting the vertical and horizontal gaps between the columns 
 		gridPane.setVgap(5); 
 		gridPane.setHgap(5);       
-
+		this.onScrollStartedProperty();
 		//Setting the Grid alignment 
 		gridPane.setAlignment(Pos.TOP_LEFT);
 

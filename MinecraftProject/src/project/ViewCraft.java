@@ -72,7 +72,7 @@ public class ViewCraft extends BorderPane {
 		//Bottom
 		Pane bottom = new Pane();
 		//bottom.setStyle("-fx-background-color:#DDD;");
-		bottom.setPrefHeight(180);
+		bottom.setPrefHeight(250);
 		
 		
 		
@@ -102,8 +102,8 @@ public class ViewCraft extends BorderPane {
 		
 		this.setTop(head);
 		this.setBottom(bottom);
-		this.setLeft(left);
-		this.setRight(right);
+		this.setLeft(right);
+		this.setRight(left);
 		this.setCenter(center);
     	
     	

@@ -34,7 +34,7 @@ public class VCIPlayer extends ScrollPane{
 	
 	
 	public VCIPlayer() {
-		this.setPrefSize(1000, 150);
+		this.setPrefSize(1000, 225);
 		BackgroundSize bgs = new BackgroundSize(1000,500,false,false,false,false);
     	BackgroundImage bgi = new BackgroundImage(new Image("images/background.png"), null, null, null, bgs);
     	Background bg = new Background(bgi);
