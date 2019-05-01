@@ -19,6 +19,7 @@ public class VCRight extends GridPane{
 	Button BArborescence = new Button("Arborescence");
 	public VCRight(ControllerCraft ctrl){
 		BRecette.setOnMouseClicked(ctrl);
+		BArborescence.setOnMouseClicked(ctrl);
 		
 		Class<?> clazz = this.getClass();
         InputStream input = clazz.getResourceAsStream("/images/stick.png");
@@ -33,24 +34,12 @@ public class VCRight extends GridPane{
 		this.setPrefSize(48 * 4, 48 * 5);
 		//this.setAlignment(Pos.CENTER);
 		
-		// Zone o� placer l'item pour demander sa recette.
-		PaneItem itemRec = new PaneItem(0,0);
-		// Pour mettre une taille pr�cise
-		itemRec.setMinSize(50, 50);
-		itemRec.setMaxSize(50, 50);
-		itemRec.setStyle(basePan);
-		// Zone o� placer l'item pour demander son arborescence.
-		PaneItem itemArb = new PaneItem(0,0);
-		// Pour mettre une taille pr�cise
-		itemArb.setMinSize(50, 50);
-		itemArb.setMaxSize(50, 50);
-		itemArb.setStyle(basePan);
-		itemRec.getChildren().add(img);
+
 		this.setPadding(new Insets(10, 10, 10, 10));
 		this.add(BRecette,2,1);
 		
 		this.add(BArborescence,2,3);
-		this.add(itemArb,2,5);
+
 		
 	}
 	

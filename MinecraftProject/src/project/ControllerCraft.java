@@ -19,6 +19,7 @@ public class ControllerCraft implements EventHandler {
     String dragImage = "stick";
     ViewCraft view = new ViewCraft(this, mdl);
     PaneItem rec = new PaneItem(0,0);
+    PaneItem arb = new PaneItem(0,0);
     int ti = 48;
 	int tc = ti + 10;
 	// Cette chaine stocke les caract�ristiques d'une case vide.
@@ -113,12 +114,16 @@ public class ControllerCraft implements EventHandler {
             Scene scene = new Scene(controllerM.getView());
             primaryStage.setScene(scene);
         }
-        if (source.getText() == "Rechercher :") {
+        else if (source.getText() == "Rechercher :") {
             majInv(mdl.recherche(view.textField1.getText()));
         }
-        if (source.getText() == "Recette") {
+        else if (source.getText() == "Recette") {
         	affRecette(rec.nom);
         }
+        else if (source.getText() == "Arborescence") {
+            affArbo(arb.nom);
+        }
+        
     }
 
     public Stage getPrimaryStage() {
@@ -221,14 +226,22 @@ public class ControllerCraft implements EventHandler {
 		rec.setPrefSize(tc,tc);
 		rec.setMaxSize(tc, tc);
 		rec.nom = "vide";
-		Item img = new Item(rec.nom);
-		rec.getChildren().add(img);
 		view.vcRight.add(rec,2,2);
 		rec.setOnMousePressed(event -> {
 			rec.nom = dragImage;
 			Item dimg = new Item(dragImage);
 			rec.getChildren().clear();
 			rec.getChildren().add(dimg);		});
+		arb.setStyle(basePan);
+		arb.setPrefSize(tc,tc);
+		arb.setMaxSize(tc, tc);
+		arb.nom = "vide";
+		view.vcRight.add(arb,2,5);
+		arb.setOnMousePressed(event -> {
+			arb.nom = dragImage;
+			Item dimg = new Item(dragImage);
+			arb.getChildren().clear();
+			arb.getChildren().add(dimg);		});
     }
     
     public void affRecette(String n) {
@@ -244,5 +257,9 @@ public class ControllerCraft implements EventHandler {
 			}
 		}
     	majTable();
+    }
+    public void affArbo(String n) {
+    	ViewArbo centerView = new ViewArbo();
+    	this.view.setCenter(centerView);
     }
 }

@@ -32,12 +32,11 @@ public class VCInv extends ScrollPane{
 	
 	public VCInv() {
 
-		//this.setStyle("-fx-background-color:pink;");
+		
 
 		//Setting the vertical and horizontal gaps between the columns 
 		gridPane.setVgap(5); 
 		gridPane.setHgap(5);       
-		this.onScrollStartedProperty();
 		//Setting the Grid alignment 
 		gridPane.setAlignment(Pos.TOP_LEFT);
 

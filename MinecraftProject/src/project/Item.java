@@ -13,8 +13,8 @@ public class Item extends ImageView{
 	
 	public String nom;
 	public int x=0,y=0;
-	public ArrayList<Item> Ascendant;
-	public ArrayList<Item> Descendant;
+	public ArrayList<String> Ascendant = new ArrayList<String>();
+	public ArrayList<String> Descendant = new ArrayList<String>();
 	public int craftCode = -1; 		// cette variable stocke un code correspondant au nombre et type d'objet utilisé pour le construire
 	// Cette liste stocke la matrice du craft
 	public ArrayList<ArrayList<Item>> craftList = new ArrayList<ArrayList<Item>>();
@@ -23,6 +23,7 @@ public class Item extends ImageView{
 	
 	public Item(String n) {
 		this.nom = n;
+		//System.out.println(n);
 		Class<?> clazz = this.getClass();
 		InputStream input = clazz.getResourceAsStream("/images/" + n +".png");
 		this.setImage(new Image(input));
@@ -38,15 +39,7 @@ public class Item extends ImageView{
         return this.nom;
     }
 	
-	public void addNeed(Item[][] peres) {
-		for (int i = 0; i < peres.length; i++) {
-			for (int j = 0; j < peres[0].length; j++) {
-				if (peres[i][j] != null) {
-					peres[i][j].Ascendant.add(this);
-				}
-			}
-		}
-	}
+
 	
 	public void howToCraft(Object cList) {
 		this.craftList = new ArrayList<ArrayList<Item>>();
@@ -74,6 +67,7 @@ public class Item extends ImageView{
 			
 		}
 		this.getMinCraft();
+		
 		this.craftCode();
 	}
 	// Méthode s'appliquant à la zone de craft, comparant, l'objet de test et un autre Item.

@@ -69,6 +69,7 @@ public class Modele extends Application {
     	Items.put("gold", gold);
     	Items.put("iron", iron);
     	Items.put("leather", leather);
+    	Items.put("feather", feather);
     	Items.put("redstone", redstone);
     	Items.put("rock", rock);
     	Items.put("sugarcane", sugarcane);
@@ -91,6 +92,8 @@ public class Modele extends Application {
 
     	lireBDD();
     	System.out.println(Items);
+    	System.out.println(Items.get("wood").Ascendant);
+    	System.out.println(Items.get("wood").Descendant);
 
 		
 	}
@@ -170,6 +173,7 @@ public class Modele extends Application {
         		Item k = new Item(nom);
         		k.howToCraft(listCraft);
         		Items.put(nom,k );
+        		addFamille(k.nom);
         		codeCraft.addVal(k);
         		listeItems += nom + ";";
         		
@@ -180,6 +184,21 @@ public class Modele extends Application {
         	catch (Exception e){
         		System.out.println("Tout vassé" + e.toString());
         	}
+    }
+    public void addFamille(String k) {
+    	Item item = Items.get(k);
+		for (int i = 0; i < item.craftList.size(); i++) {
+			for (int j = 0; j < item.craftList.get(0).size(); j++) {
+				String obj = item.craftList.get(i).get(j).nom ;
+				
+				if ((!item.Ascendant.contains(obj)) && obj != "vide") {
+					item.Ascendant.add(item.craftList.get(i).get(j).nom);
+				}
+				if (!Items.get(obj).Descendant.contains(item.nom)) {
+					Items.get(item.craftList.get(i).get(j).nom).Descendant.add(item.nom);
+				}
+			}
+		}
     }
 }
 
