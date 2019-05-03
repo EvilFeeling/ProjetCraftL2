@@ -10,6 +10,7 @@ import javafx.scene.layout.Pane;
 
 
 
+
 public class VCRight extends Pane{
 	String basePan = "-fx-border-color: WHITE;-fx-background-color: #c6c6c6; -fx-effect: innershadow( three-pass-box, rgba( 0, 0, 0, 0.5 ), 10, 0.2, 1, 1 ); -fx-font-size:10;";
 	Button BRecette = new Button("Recette");

@@ -6,7 +6,6 @@ import javafx.geometry.Insets;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
-
 public class VCTable extends Pane {
 	
 	GridPane grid =new GridPane();

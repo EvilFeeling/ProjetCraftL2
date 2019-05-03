@@ -9,6 +9,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 
+
 // Va g�nerer la zone d'inventaire du player
 public class VCInv extends ScrollPane{
 	int ti = 48;

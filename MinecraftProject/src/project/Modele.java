@@ -50,6 +50,7 @@ public class Modele extends Application {
 		else {
 			
 			for(Entry<String, Item> entry : Items.entrySet()) {
+			    String key = entry.getKey();
 			    Item value = entry.getValue();
 			    res.add(value);
 			}
