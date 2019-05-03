@@ -10,6 +10,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.control.Button;
 import javafx.scene.effect.InnerShadow;
+import javafx.scene.effect.ReflectionBuilder;
 import javafx.stage.Stage;
 
 public class ControllerCraft implements EventHandler {
@@ -17,11 +18,10 @@ public class ControllerCraft implements EventHandler {
     Pane res = new Pane();
     Modele mdl;
     String dragImage = "stick";
-    ViewCraft view = new ViewCraft(this, mdl);
+    ViewCraft view ;
     PaneItem rec = new PaneItem(0,0);
     PaneItem arb = new PaneItem(0,0);
-    int ti = 48;
-	int tc = ti + 10;
+
 	// Cette chaine stocke les caract�ristiques d'une case vide.
 	String basePan = "-fx-border-color: WHITE;-fx-background-color: #c6c6c6; -fx-effect: innershadow( three-pass-box, rgba( 0, 0, 0, 0.5 ), 10, 0.2, 1, 1 ); -fx-font-size:10;";
 	
@@ -44,19 +44,20 @@ public class ControllerCraft implements EventHandler {
 							{new PaneItem(0,1),new PaneItem(1,1),new PaneItem(2,1)},
 							{new PaneItem(0,2),new PaneItem(1,2),new PaneItem(2,2)}
 						};
-	ArrayList<Item> matInvP = new ArrayList<Item>();
+
 
 
     public ControllerCraft(final Stage primaryStage,Modele modl) {
     	// Initialisation du controlleur.
         this.primaryStage = primaryStage;
         this.mdl = modl;
+        view = new ViewCraft(this, mdl);
         
     	
     	// Gestion de la table de Craft
     	Pane VIDE= new Pane ();
     	VIDE.setStyle(" -fx-font-size:10;");
-		VIDE.setPrefSize(tc,tc);
+		VIDE.setPrefSize(mdl.tc,mdl.tc);
 		// On initialise, la zone de craft, avec une recette de craft emplie d'objets vide.
 		zoneCraft.howToCraft(new Item[][]	{{vide,vide,vide}								,{vide,vide,vide}						,{vide,vide,vide}});
 		
@@ -66,8 +67,8 @@ public class ControllerCraft implements EventHandler {
 			for (int j = 0; j < tabP.length; j++) {
 				
 				tabP[i][j].setStyle(basePan);
-				tabP[i][j].setMaxSize(tc,tc);
-				tabP[i][j].setMinSize(tc,tc);
+				tabP[i][j].setMaxSize(mdl.tc,mdl.tc);
+				tabP[i][j].setMinSize(mdl.tc,mdl.tc);
 				// Doit modifier la matrice.
 				tabP[i][j].setOnMousePressed(event -> {
 					Item img = new Item(dragImage);
@@ -83,7 +84,7 @@ public class ControllerCraft implements EventHandler {
 		}
 		// Init de la case de r�sultat
 		res.setStyle(basePan);
-		res.setPrefSize(tc,tc);
+		res.setPrefSize(mdl.tc,mdl.tc);
 		res.setOnMousePressed(event -> {
 			if (res.getChildren().size() > 0) {
 				dragImage = ((Item)res.getChildren().get(0)).nom;
@@ -109,6 +110,7 @@ public class ControllerCraft implements EventHandler {
     @Override
     public void handle(Event event) {
         final Button source = (Button)event.getSource();
+        System.out.println(source);
         if (source.getText() == "Menu") {
             ControllerMenu controllerM = new ControllerMenu(primaryStage,mdl);
             Scene scene = new Scene(controllerM.getView());
@@ -158,22 +160,22 @@ public class ControllerCraft implements EventHandler {
 	}
     
     public void majInv(ArrayList<Item> listObj) {
-    	
+    	view.invPlayer.tabP = new ArrayList<ArrayList<PaneItem>>();
     	ArrayList<PaneItem> ligne = new ArrayList<PaneItem>();
 		for (int i=0;i<view.invPlayer.nlig ;i++) {
 			
 			for (int j = 0; j < view.invPlayer.ncol ; j++) {
 				PaneItem k = new PaneItem(i,j);
 				k.setStyle(basePan);
-				k.setPrefSize(tc,tc);
-				k.setMaxSize(tc, tc);
+				k.setPrefSize(mdl.tc,mdl.tc);
+				k.setMaxSize(mdl.tc, mdl.tc);
 				if (i * view.invPlayer.ncol  + j < listObj.size()) {
 					k.nom = listObj.get(i * view.invPlayer.ncol  + j).nom;
 				}		
 				else {
 					k.nom = "vide";
 				}
-				Item img = new Item(k.nom);
+				Item img = mdl.Items.get(k.nom);
 				k.getChildren().add(img);
 				view.invPlayer.gridPane.add(k,j ,i + 1 );
 				k.setOnMousePressed(event -> {
@@ -194,8 +196,8 @@ public class ControllerCraft implements EventHandler {
 			for (int j = 0; j < view.invCrea.ncol ; j++) {
 				PaneItem k = new PaneItem(i,j);
 				k.setStyle(basePan);
-				k.setPrefSize(tc,tc);
-				k.setMaxSize(tc, tc);
+				k.setPrefSize(mdl.tc,mdl.tc);
+				k.setMaxSize(mdl.tc, mdl.tc);
 				k.nom = "vide";
 				Item img = new Item(k.nom);
 				k.getChildren().add(img);
@@ -223,8 +225,8 @@ public class ControllerCraft implements EventHandler {
     public void rightCraft() {
     	
 		rec.setStyle(basePan);
-		rec.setPrefSize(tc,tc);
-		rec.setMaxSize(tc, tc);
+		rec.setPrefSize(mdl.tc,mdl.tc);
+		rec.setMaxSize(mdl.tc, mdl.tc);
 		rec.nom = "vide";
 		rec.relocate(30, 30);
 		
@@ -233,9 +235,10 @@ public class ControllerCraft implements EventHandler {
 			Item dimg = new Item(dragImage);
 			rec.getChildren().clear();
 			rec.getChildren().add(dimg);		});
+		
 		arb.setStyle(basePan);
-		arb.setPrefSize(tc,tc);
-		arb.setMaxSize(tc, tc);
+		arb.setPrefSize(mdl.tc,mdl.tc);
+		arb.setMaxSize(mdl.tc,mdl.tc);
 		arb.nom = "vide";
 		arb.relocate(30, 150);
 		arb.setOnMousePressed(event -> {
@@ -261,8 +264,9 @@ public class ControllerCraft implements EventHandler {
     	majTable();
     }
     public void affArbo(String n) {
-    	ViewArbo centerView = new ViewArbo();
-    	
-    	//this.view.setCenter(centerView);
+    	if (arb.nom != "vide") {
+    		this.view.viewArb.majAb(n);
+    		this.view.viewArb.setVisible(true);
+    	}
     }
 }

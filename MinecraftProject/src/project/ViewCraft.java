@@ -22,7 +22,7 @@ public class ViewCraft extends Pane {
 	TextField textField1 = new TextField(); 
   		
 	
-    
+	ViewArbo viewArb ;
     VCIPlayer invPlayer = new VCIPlayer();
     VCInv invCrea = new VCInv();
     VCTable craftTable = new VCTable();
@@ -35,6 +35,7 @@ public class ViewCraft extends Pane {
     	BQuit.setOnAction(controllerC);
     	search.setOnAction(controllerC);
     	vcRight = new VCRight(controllerC);
+    	viewArb = new ViewArbo(mdl);
     	textField1.setPrefWidth(80);
    	
     	//this.setStyle("-fx-background-color:#AAA;");
@@ -81,6 +82,9 @@ public class ViewCraft extends Pane {
 		
 		bottom.getChildren().add(search);
 		textField1.setLayoutX(90);
+		textField1.setOnKeyReleased(event -> {
+			controllerC.majInv(mdl.recherche(textField1.getText()));			
+		});
 		invPlayer.setLayoutY(30);
 		bottom.getChildren().add(textField1);
 		bottom.getChildren().add(invPlayer);
@@ -105,7 +109,12 @@ public class ViewCraft extends Pane {
 		right.getChildren().add(vcRight);
 		right.relocate(50, 100);
 		
+		
+    	System.out.println(this.getChildren());
+    	viewArb.setVisible(false);
+    	System.out.println(this.getChildren());
 		this.getChildren().addAll(head,bottom,right,left,center);
+		this.getChildren().add(viewArb);
 
     	
     	

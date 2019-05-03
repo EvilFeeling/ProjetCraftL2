@@ -46,12 +46,7 @@ public class VCIPlayer extends ScrollPane{
 		//this.setStyle("-fx-opacity:0.5;");
 		//this.setOpacity(0.5);
 		//creating label rechercher 
-		
 
-
-		
-
-		
 
 		//Setting the vertical and horizontal gaps between the columns 
 		gridPane.setVgap(5); 
@@ -62,9 +57,6 @@ public class VCIPlayer extends ScrollPane{
 
 		gridPane.setPadding(new Insets(0, 10, 10, 10));
 
-
-		
-		
 		for (int i = 0; i < ncol; i++) {
             ColumnConstraints colConst = new ColumnConstraints();
             colConst.setMaxWidth(tc);

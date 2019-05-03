@@ -27,6 +27,8 @@ public class Modele extends Application {
 	
 	codeCraft_HashMap codeCraft = new codeCraft_HashMap ();
 	HashMap<String,Item> Items = new HashMap<String,Item>();
+    int ti = 48;
+	int tc = ti + 10;
 	
     public static void main(final String[] args) {
         launch();
@@ -37,6 +39,7 @@ public class Modele extends Application {
     public void init() {
 
     	lireBDD();
+    	//System.out.println(Items);
 		
 	}
 	
@@ -46,7 +49,7 @@ public class Modele extends Application {
 			Pattern p = Pattern.compile("([\\w-]*" + x +"[\\w-]*)", Pattern.CASE_INSENSITIVE);
 	    	Matcher m = p.matcher(listeItems);
 	    	while(m.find()) {
-	    		res.add(new Item(m.group(1)));
+	    		res.add(Items.get(m.group(1)));
 	    	}
 		}
 		else {
@@ -138,7 +141,7 @@ public class Modele extends Application {
 			for (int j = 0; j < item.craftList.get(0).size(); j++) {
 				String obj = item.craftList.get(i).get(j).nom ;
 				
-				if ((!item.Ascendant.contains(obj)) && obj != "vide") {
+				if ((!item.Ascendant.contains(obj)) && Items.get(obj) != Items.get("vide")) {
 					item.Ascendant.add(item.craftList.get(i).get(j).nom);
 				}
 				if (!Items.get(obj).Descendant.contains(item.nom)) {
