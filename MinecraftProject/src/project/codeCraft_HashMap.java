@@ -1,7 +1,6 @@
 package project;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Observable;
 
 public class codeCraft_HashMap extends HashMap<Integer, ArrayList<Item>> {
 

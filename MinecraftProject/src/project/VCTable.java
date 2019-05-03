@@ -1,15 +1,11 @@
 package project;
 
-import java.io.InputStream;
 
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
+
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.Node;
+
 
 public class VCTable extends Pane {
 	

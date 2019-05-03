@@ -1,8 +1,6 @@
 package project;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
-import javafx.stage.Stage;
 
 public class ViewMenu extends HBox {
     Button BCraft = new Button("Craft");

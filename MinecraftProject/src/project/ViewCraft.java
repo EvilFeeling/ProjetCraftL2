@@ -1,20 +1,17 @@
 package project;
-import javafx.event.EventHandler;
 
 
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
-import javafx.event.ActionEvent;
+
 public class ViewCraft extends Pane {
     Button BInfo = new Button("?");
     Button BQuit = new Button("Quitter");
@@ -83,6 +80,7 @@ public class ViewCraft extends Pane {
 		bottom.getChildren().add(search);
 		textField1.setLayoutX(90);
 		textField1.setOnKeyReleased(event -> {
+			//mdl.recherche(textField1.getText());
 			controllerC.majInv(mdl.recherche(textField1.getText()));			
 		});
 		invPlayer.setLayoutY(30);

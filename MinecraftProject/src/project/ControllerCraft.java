@@ -1,16 +1,12 @@
 package project;
 
 import java.util.ArrayList;
-import java.util.Map.Entry;
 
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.scene.control.Button;
-import javafx.scene.effect.InnerShadow;
-import javafx.scene.effect.ReflectionBuilder;
 import javafx.stage.Stage;
 
 public class ControllerCraft implements EventHandler {
@@ -162,6 +158,8 @@ public class ControllerCraft implements EventHandler {
     public void majInv(ArrayList<Item> listObj) {
     	view.invPlayer.tabP = new ArrayList<ArrayList<PaneItem>>();
     	ArrayList<PaneItem> ligne = new ArrayList<PaneItem>();
+    	// Cette ligne réinitialise le gridpane, le lag venait d'ici, le grid était surchargé et non vidé
+    	view.invPlayer.gridPane.getChildren().clear();
 		for (int i=0;i<view.invPlayer.nlig ;i++) {
 			
 			for (int j = 0; j < view.invPlayer.ncol ; j++) {

@@ -1,20 +1,13 @@
 package project;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.Priority;
-import javafx.scene.text.Text;
 
 // Va g�nerer la zone d'inventaire du player
 public class VCInv extends ScrollPane{

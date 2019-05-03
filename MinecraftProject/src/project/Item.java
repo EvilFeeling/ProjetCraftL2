@@ -62,7 +62,6 @@ public class Item extends ImageView{
 		}
 		else if (cList instanceof ArrayList<?>) {
 			ArrayList<ArrayList<Item>> laListe = new ArrayList<ArrayList<Item>>();
-			laListe = (ArrayList<ArrayList<Item>>) cList;
 			this.craftList = laListe;
 			
 		}
