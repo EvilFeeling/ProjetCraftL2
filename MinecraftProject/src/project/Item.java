@@ -69,6 +69,10 @@ public class Item extends ImageView{
 		this.getMinCraft();
 		
 		this.craftCode();
+		System.out.println(this);
+		System.out.println(this.craftList);
+		System.out.println(this.craftCode);
+		System.out.println();
 	}
 	// Méthode s'appliquant à la zone de craft, comparant, l'objet de test et un autre Item.
 	public boolean sameCraft(Item other) {
@@ -111,27 +115,27 @@ public class Item extends ImageView{
 				finalCraft.add(ligne);
 			}
 			this.craftList = finalCraft;
-		}		
+		}	
+		
 	}
 	
 	@Override
     public int hashCode() {
 		
-		if (this.nom == "vide") {
-			return 0;
-		}
         return this.nom.hashCode();
     }
 	
 	public void craftCode() {
 		this.craftCode = -1;
+		String chaine = "";
 		for (int i = 0; i < this.craftList.size(); i++) {
 			for (int j = 0; j < this.craftList.get(0).size(); j++) {
-				Item k = this.craftList.get(i).get(j);
-				this.craftCode += (i*3 + j*20 +k.nom).hashCode();
+				chaine += this.craftList.get(i).get(j).nom;
 			}
+			chaine += ";";
 				
 		}
+	this.craftCode = chaine.hashCode();
 	}
 	
 }

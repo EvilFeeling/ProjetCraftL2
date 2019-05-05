@@ -10,7 +10,6 @@ import javafx.scene.layout.Pane;
 
 public class ViewArbo extends Pane {
 	GridPane gridArb = new GridPane ();
-	String basePan = "-fx-border-color: WHITE;-fx-background-color: #c6c6c6; -fx-effect: innershadow( three-pass-box, rgba( 0, 0, 0, 0.5 ), 10, 0.2, 1, 1 ); -fx-font-size:10;";
 	Modele mdl;
 	int ti = 48;
 	int tc = ti + 10;
@@ -59,10 +58,7 @@ public class ViewArbo extends Pane {
 		Item k = mdl.Items.get(n);
 		int nbAsc = k.Ascendant.size();
 		for (int i = 0; i < nbAsc; i++) {
-			PaneItem p = new PaneItem(0,0);
-			p.setStyle(basePan);
-			p.setPrefSize(tc,tc);
-			p.setMaxSize(tc, tc);
+			PaneItem p = new PaneItem();
 			Item img = new Item(k.Ascendant.get(i));
 			p.getChildren().add(img);
 			
@@ -72,10 +68,7 @@ public class ViewArbo extends Pane {
 			gridArb.add(p,0,i);
 		}
 		// L'objet central
-		PaneItem pobj = new PaneItem(0,0);
-		pobj.setStyle(basePan);
-		pobj.setPrefSize(tc,tc);
-		pobj.setMaxSize(tc, tc);
+		PaneItem pobj = new PaneItem();
 		Item imgobj = new Item(n);
 		pobj.getChildren().add(imgobj);
 		
@@ -104,6 +97,7 @@ public class ViewArbo extends Pane {
 			Pane pan = new Pane();
 			pan.setPrefSize(tc,tc);
 			pan.setMaxSize(tc, tc);
+			
 			gridArb.add(pan,2,posY+1);
 			if (img.Ascendant.size() > 2) {
 				posY += obj.Ascendant.size() - 1;
@@ -116,10 +110,7 @@ public class ViewArbo extends Pane {
 				posY += 2;
 			}
 			
-			PaneItem p = new PaneItem(0,0);
-			p.setStyle(basePan);
-			p.setPrefSize(tc,tc);
-			p.setMaxSize(tc, tc);
+			PaneItem p = new PaneItem();
 			
 			p.getChildren().add(img);
 			if (i == 0) {
@@ -134,15 +125,11 @@ public class ViewArbo extends Pane {
 			
 			//System.out.println(img.Ascendant);
 			int posYY = 0;
-			System.out.println(obj.Ascendant.size());
 			for (int j = 0; j < obj.Ascendant.size(); j++) {
 				//System.out.println("rez");
 				if (mdl.Items.get(obj.Ascendant.get(j)) != mdl.Items.get(n) || i == 0) {
 					Item imgA = new Item(obj.Ascendant.get(j));
-					PaneItem po = new PaneItem(0,0);
-					po.setStyle(basePan);
-					po.setPrefSize(tc,tc);
-					po.setMaxSize(tc, tc);
+					PaneItem po = new PaneItem();
 					po.getChildren().add(imgA);
 					
 					po.draw("Ascendant", 0);

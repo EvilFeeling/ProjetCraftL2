@@ -7,6 +7,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseButton;
 import javafx.stage.Stage;
 
 public class ControllerCraft implements EventHandler {
@@ -15,8 +16,8 @@ public class ControllerCraft implements EventHandler {
     Modele mdl;
     String dragImage = "stick";
     ViewCraft view ;
-    PaneItem rec = new PaneItem(0,0);
-    PaneItem arb = new PaneItem(0,0);
+    PaneItem rec = new PaneItem();
+    PaneItem arb = new PaneItem();
 
 	// Cette chaine stocke les caract�ristiques d'une case vide.
 	String basePan = "-fx-border-color: WHITE;-fx-background-color: #c6c6c6; -fx-effect: innershadow( three-pass-box, rgba( 0, 0, 0, 0.5 ), 10, 0.2, 1, 1 ); -fx-font-size:10;";
@@ -36,9 +37,9 @@ public class ControllerCraft implements EventHandler {
 							{vide,vide,vide}
 						};
 
-	Pane[][] tabP = 	{	{new PaneItem(0,0),new PaneItem(1,0),new PaneItem(2,0)},
-							{new PaneItem(0,1),new PaneItem(1,1),new PaneItem(2,1)},
-							{new PaneItem(0,2),new PaneItem(1,2),new PaneItem(2,2)}
+	Pane[][] tabP = 	{	{new PaneItem(),new PaneItem(),new PaneItem()},
+							{new PaneItem(),new PaneItem(),new PaneItem()},
+							{new PaneItem(),new PaneItem(),new PaneItem()}
 						};
 
 
@@ -48,6 +49,7 @@ public class ControllerCraft implements EventHandler {
         this.primaryStage = primaryStage;
         this.mdl = modl;
         view = new ViewCraft(this, mdl);
+        
         
     	
     	// Gestion de la table de Craft
@@ -67,9 +69,15 @@ public class ControllerCraft implements EventHandler {
 				tabP[i][j].setMinSize(mdl.tc,mdl.tc);
 				// Doit modifier la matrice.
 				tabP[i][j].setOnMousePressed(event -> {
+					MouseButton mouseB = event.getButton();
 					Item img = new Item(dragImage);
 					PaneItem obj = ((PaneItem)event.getSource());
-					matCraft[obj.i][obj.j] = img;
+					if (mouseB == MouseButton.PRIMARY) {
+						obj.nom = dragImage;
+					}
+					else if (mouseB == MouseButton.SECONDARY) {
+						obj.nom = "vide";
+					}
 					majTable();
 					
 		    		
@@ -106,13 +114,8 @@ public class ControllerCraft implements EventHandler {
     @Override
     public void handle(Event event) {
         final Button source = (Button)event.getSource();
-        System.out.println(source);
-        if (source.getText() == "Menu") {
-            ControllerMenu controllerM = new ControllerMenu(primaryStage,mdl);
-            Scene scene = new Scene(controllerM.getView());
-            primaryStage.setScene(scene);
-        }
-        else if (source.getText() == "Rechercher :") {
+
+        if (source.getText() == "Rechercher :") {
             majInv(mdl.recherche(view.textField1.getText()));
         }
         else if (source.getText() == "Recette") {
@@ -120,6 +123,9 @@ public class ControllerCraft implements EventHandler {
         }
         else if (source.getText() == "Arborescence") {
             affArbo(arb.nom);
+        }
+        else if (source.getText() == "Help") {
+            affHelp();
         }
         
     }
@@ -137,9 +143,9 @@ public class ControllerCraft implements EventHandler {
 		// Modifie l'affichage d'apr�s la matrice.
 		for (int i=0;i<matCraft.length;i++) {
 			for (int j = 0; j < matCraft.length; j++) {
-				
-				String n = matCraft[i][j].nom;
-				Item img = new Item(n);
+				PaneItem obj = ((PaneItem)tabP[i][j]);
+				matCraft[i][j] = new Item(obj.nom);
+				Item img = new Item(obj.nom);
 				tabP[i][j].getChildren().clear();
 				tabP[i][j].getChildren().add(img);
 				
@@ -154,7 +160,9 @@ public class ControllerCraft implements EventHandler {
 			
 		}
 	}
-    
+    public void affHelp() {
+    	this.view.viewHelp.setVisible(true);
+    }
     public void majInv(ArrayList<Item> listObj) {
     	view.invPlayer.tabP = new ArrayList<ArrayList<PaneItem>>();
     	ArrayList<PaneItem> ligne = new ArrayList<PaneItem>();
@@ -163,7 +171,7 @@ public class ControllerCraft implements EventHandler {
 		for (int i=0;i<view.invPlayer.nlig ;i++) {
 			
 			for (int j = 0; j < view.invPlayer.ncol ; j++) {
-				PaneItem k = new PaneItem(i,j);
+				PaneItem k = new PaneItem();
 				k.setStyle(basePan);
 				k.setPrefSize(mdl.tc,mdl.tc);
 				k.setMaxSize(mdl.tc, mdl.tc);
@@ -192,24 +200,32 @@ public class ControllerCraft implements EventHandler {
 		for (int i=0;i<view.invCrea.nlig ;i++) {
 			
 			for (int j = 0; j < view.invCrea.ncol ; j++) {
-				PaneItem k = new PaneItem(i,j);
-				k.setStyle(basePan);
-				k.setPrefSize(mdl.tc,mdl.tc);
-				k.setMaxSize(mdl.tc, mdl.tc);
-				k.nom = "vide";
+				PaneItem k = new PaneItem();
 				Item img = new Item(k.nom);
 				k.getChildren().add(img);
 				view.invCrea.gridPane.add(k,j ,i + 1 );
 				k.setOnMousePressed(event -> {
-					if (k.nom == "vide") {
-						k.nom = dragImage;
-						Item dimg = new Item(dragImage);
+					MouseButton mouseB = event.getButton();
+					if (mouseB == MouseButton.PRIMARY) {
+						if (k.nom == "vide") {
+							k.nom = dragImage;
+							Item dimg = new Item(dragImage);
+							k.getChildren().clear();
+							k.getChildren().add(dimg);
+						}
+						else {
+							k.nom = dragImage;
+							Item dimg = new Item(dragImage);
+							k.getChildren().clear();
+							k.getChildren().add(dimg);
+							dragImage = k.nom;
+						}
+					}
+					else if (mouseB == MouseButton.SECONDARY) {
+						k.nom = "vide";
 						k.getChildren().clear();
-						k.getChildren().add(dimg);
 					}
-					else {
-						dragImage = k.nom;
-					}
+					
 					
 				});
 	    		ligne.add(k);
@@ -248,18 +264,24 @@ public class ControllerCraft implements EventHandler {
     }
     
     public void affRecette(String n) {
-    	System.out.println("salutt");
-    	System.out.println(mdl.Items.get((String)n));
     	ArrayList<ArrayList <Item>> craftRec = mdl.Items.get(n).craftList;
     	for (int i = 0; i < matCraft.length; i++) {
     		for (int j = 0; j < matCraft[0].length; j++) {
     			matCraft[i][j] = vide;
+    			tabP[i][j].getChildren().clear();
 				if (i < craftRec.size() && j < craftRec.get(0).size()) {
 					matCraft[i][j] = craftRec.get(i).get(j);
+					tabP[i][j].getChildren().add(craftRec.get(i).get(j));
 				}
 			}
 		}
-    	majTable();
+    	zoneCraft.howToCraft(matCraft);
+    	res.getChildren().clear();
+		if (mdl.codeCraft.get(zoneCraft.craftCode) != null) {
+			Item resultat = new Item(mdl.codeCraft.get(zoneCraft.craftCode).get(0).nom);
+			res.getChildren().add(resultat);
+			
+		}
     }
     public void affArbo(String n) {
     	if (arb.nom != "vide") {

@@ -41,7 +41,7 @@ public class Modele extends Application {
 	public ArrayList<Item> recherche(String x){
 		ArrayList<Item> res = new ArrayList<Item>();
 		if (x.length() != 0) {
-			Pattern p = Pattern.compile("([\\w-]*" + x +"[\\w-]*)", Pattern.CASE_INSENSITIVE);
+			Pattern p = Pattern.compile("(\\w*" + x +"\\w*)", Pattern.CASE_INSENSITIVE);
 	    	Matcher m = p.matcher(listeItems);
 	    	while(m.find()) {
 	    		res.add(Items.get(m.group(1)));

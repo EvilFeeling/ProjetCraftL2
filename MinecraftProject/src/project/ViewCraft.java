@@ -5,15 +5,18 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontSmoothingType;
+import javafx.scene.text.Text;
 public class ViewCraft extends Pane {
-    Button BInfo = new Button("?");
-    Button BQuit = new Button("Quitter");
+    Button BInfo = new Button("Help");
     Button search = new Button("Rechercher :");  
 	TextField textField1 = new TextField(); 
   		
@@ -23,16 +26,25 @@ public class ViewCraft extends Pane {
     VCInv invCrea = new VCInv();
     VCTable craftTable = new VCTable();
 	VCRight vcRight ;
+    ViewHelp viewHelp ;
+
 
     Pane Q = new Pane();
 
     public ViewCraft(ControllerCraft controllerC, Modele mdl) {
     	BInfo.setOnAction(controllerC);
-    	BQuit.setOnAction(controllerC);
     	search.setOnAction(controllerC);
     	vcRight = new VCRight(controllerC);
     	viewArb = new ViewArbo(mdl);
+    	viewHelp = new ViewHelp( mdl);
     	textField1.setPrefWidth(80);
+    	
+    	BInfo.setShape(new Circle(10));
+    	BInfo.relocate(950, 15);
+    	
+    	ImageView Title = new ImageView("images/title.png");
+    	Title.relocate(300, 15);
+    	Title.setOpacity(0.7);
    	
     	//this.setStyle("-fx-background-color:#AAA;");
     	BackgroundSize bgs = new BackgroundSize(1000,500,false,false,false,false);
@@ -44,14 +56,12 @@ public class ViewCraft extends Pane {
     	
 		
     	//Top
-		BorderPane head = new BorderPane();
+		Pane head = new Pane();
 		//head.setStyle("-fx-background-color:orange;");
 		head.setPrefHeight(75);
-		head.setPadding(new Insets(10,10,10,10));
-		BInfo.setShape(new Circle(10));
+		
     	//BInfo.setStyle("-fx-border-width:3px;-fx-effect:dropshadow( three-pass-box, rgba( 0, 0, 0, 0.5 ), 10, 0.2, 1, 1 );");
-		head.setLeft(BQuit);
-		head.setRight(BInfo);
+		head.getChildren().addAll(BInfo,Title);
 		head.relocate(0, 0);
 		
 		
@@ -108,9 +118,9 @@ public class ViewCraft extends Pane {
 		
     	System.out.println(this.getChildren());
     	viewArb.setVisible(false);
-    	System.out.println(this.getChildren());
+    	viewHelp.setVisible(false);
 		this.getChildren().addAll(head,bottom,right,left,center);
-		this.getChildren().add(viewArb);
+		this.getChildren().addAll(viewArb,viewHelp);
 
     	
     	

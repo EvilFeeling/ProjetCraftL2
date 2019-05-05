@@ -1,3 +1,5 @@
+flute_pan:
+zoo:
 vide:
 diamond:
 wood:
@@ -24,9 +26,9 @@ arrow:flint;stick;feather;
 wood_slab:wood_plank,wood_plank,wood_plank;
 boat:wood_plank,vide,wood_plank;wood_plank,wood_plank,wood_plank;
 paper:sugarcane,sugarcane,sugarcane;
-book:paper,paper,vide;paper,leather,vide;
+book:paper,paper;paper,leather;
 bookshelf:wood_plank,wood_plank,wood_plank;book,book,book;wood_plank,wood_plank,wood_plank;
-bow:vide,stick,string;stick,vide,string;vide,stick,string;
+bow:string,stick,vide;string,vide,stick;string,stick,vide;
 bucket:iron,vide,iron;vide,iron,vide;
 chest:wood_plank,wood_plank,wood_plank;wood_plank,vide,wood_plank;wood_plank,wood_plank,wood_plank;
 cobblestone_slab:rock,rock,rock;
@@ -77,3 +79,4 @@ diamondhelmet:diamond,diamond,diamond;diamond,vide,diamond;
 enchanting_table:vide,book,vide;diamond,obsidian,diamond;obsidian,obsidian,obsidian;
 tnt:gunpowder,sand,gunpowder;sand,gunpowder,sand;gunpowder,sand,gunpowder;
 firework:paper;gunpowder;
+panzoli:flute_pan,zoo,bed;:

@@ -15,7 +15,7 @@ public class VCInv extends ScrollPane{
 	int ti = 48;
 	int tc = ti + 10;
 	int ncol = 3;
-	int nlig = 70;
+	int nlig = 10;
 	Item vide = new Item("vide");
 	//Creating a Grid Pane 
 	GridPane gridPane =new GridPane();	
